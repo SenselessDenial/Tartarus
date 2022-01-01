@@ -61,8 +61,108 @@ namespace Tartarus
             return currMouseState.LeftButton == ButtonState.Pressed;
         }
 
+        #region MAPPING
+
+        private static Keys up = Keys.Up;
+        private static Keys down = Keys.Down;
+        private static Keys left = Keys.Left;
+        private static Keys right = Keys.Right;
+        private static Keys a = Keys.Space;
+        private static Keys b = Keys.C;
+        private static Keys start = Keys.T;
+
+        private static Keys GetMapping(MappedKeys mapkey)
+        {
+            switch (mapkey)
+            {
+                case MappedKeys.Up:
+                    return up;
+                case MappedKeys.Down:
+                    return down;
+                case MappedKeys.Left:
+                    return left;
+                case MappedKeys.Right:
+                    return right;
+                case MappedKeys.A:
+                    return a;
+                case MappedKeys.B:
+                    return b;
+                case MappedKeys.Start:
+                    return start;
+                default:
+                    throw new Exception("Mapped key not recongized.");
+            }
+        }
+
+        public static void RemapKey(MappedKeys mapkey, Keys key)
+        {
+            switch (mapkey)
+            {
+                case MappedKeys.Up:
+                    up = key;
+                    break;
+                case MappedKeys.Down:
+                    down = key;
+                    break;
+                case MappedKeys.Left:
+                    left = key;
+                    break;
+                case MappedKeys.Right:
+                    right = key;
+                    break;
+                case MappedKeys.A:
+                    a = key;
+                    break;
+                case MappedKeys.B:
+                    b = key;
+                    break;
+                case MappedKeys.Start:
+                    start = key;
+                    break;
+                default:
+                    throw new Exception("Mapped key not recongized.");
+            }
+        }
 
 
+        public static bool Check(MappedKeys key)
+        {
+            return Input.Check(GetMapping(key));
+        }
+
+        public static bool Pressed(MappedKeys key)
+        {
+            return Input.Pressed(GetMapping(key));
+        }
+
+        public static bool Released(MappedKeys key)
+        {
+            return Input.Released(GetMapping(key));
+        }
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
 
     }
+
+    public enum MappedKeys
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+        A,
+        B,
+        Start
+    }
+
 }

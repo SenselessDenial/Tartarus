@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
@@ -13,6 +14,7 @@ namespace Tartarus
         protected Renderer Renderer;
         private Dictionary<int, double> depthLookup;
         protected Camera Camera => Renderer.Camera;
+        internal Color FillColor = Color.White;
 
         public Scene()
         {
@@ -47,9 +49,9 @@ namespace Tartarus
             Entities.Update();
         }
 
-        public virtual void Draw()
+        public virtual void Render()
         {
-            Renderer.Draw();
+            Renderer.Render();
         }
 
         internal void SetDepth(Entity entity)
@@ -74,6 +76,11 @@ namespace Tartarus
         IEnumerator IEnumerable.GetEnumerator()
         {
             return Entities.GetEnumerator();
+        }
+
+        protected void Exit()
+        {
+            TartarusGame.Instance.Exit();
         }
     }
 }

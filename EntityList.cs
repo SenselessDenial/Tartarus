@@ -159,12 +159,12 @@ namespace Tartarus
                     item.Update();
             IsLocked = false;
         }
-        internal void Draw()
+        internal void Render()
         {
             IsLocked = true;
             foreach (var item in entities)
                 if (item.IsVisible)
-                    item.Draw();
+                    item.Render();
             IsLocked = false;
         }
 

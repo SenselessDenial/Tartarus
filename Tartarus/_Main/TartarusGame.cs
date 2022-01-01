@@ -13,7 +13,6 @@ namespace Tartarus
         private GraphicsDeviceManager graphics;
 
         public static Color BGColor = Color.Maroon;
-        public static Font SmallFont { get; private set; }
         public static TartarusGame Instance { get; private set; }
         public static double RawTotalTime { get; private set; }
         public static double RawDeltaTime { get; private set; }
@@ -39,12 +38,6 @@ namespace Tartarus
                 graphics.ApplyChanges();
             }
         }
-
-        private Test Test = new Test();
-        private Demo Demo = new Demo();
-
-        private TestScene t;
-
 
         public Scene Scene
         {
@@ -74,16 +67,13 @@ namespace Tartarus
 
         protected override void Initialize()
         {
+            base.Initialize();
             Input.Initialize();
             Drawing.Initialize();
 
-            SmallFont = new Font("small_font.png", 4, 6);
+            SceneManager.Initialize();
 
-            //Demo.Initialize();
-            t = new TestScene();
-            Scene = t;
-
-            base.Initialize();
+            Scene = SceneManager.Default;
         }
 
         protected override void LoadContent() { }
@@ -103,9 +93,7 @@ namespace Tartarus
             //Demo.Update();
 
             if (Scene != null)
-            {
                 Scene.Update();
-            }
 
             if (scene != nextScene)
             {
@@ -125,19 +113,10 @@ namespace Tartarus
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(BGColor);
-
-            //Drawing.SpriteBatch.Begin(SpriteSortMode.Deferred, 
-            //                          BlendState.AlphaBlend,
-            //                          SamplerState.PointClamp, 
-            //                          null, null, null, Overlord.Matrix);
-
-            //Demo.Draw();
-
-            //Drawing.SpriteBatch.End();
+            //GraphicsDevice.Clear(BGColor);
 
             if (Scene != null)
-                Scene.Draw();
+                Scene.Render();
 
             base.Draw(gameTime);
         }

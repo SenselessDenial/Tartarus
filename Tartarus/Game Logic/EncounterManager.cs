@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Tartarus
 {
-    class EncounterManager : Component
+    public class EncounterManager : Component
     {
         public Encounter Encounter { get; private set; }
         public Party ActiveParty => Encounter.ActiveParty;
@@ -16,6 +16,7 @@ namespace Tartarus
         private Actor previousActor;
         private Actor currentTarget = null;
         private Skill currentSkill = null;
+        private Font SmallFont => Drawing.SmallFont;
 
         public RadioButtonSet CurrentChoice
         {
@@ -85,32 +86,32 @@ namespace Tartarus
         {
             choices.Clear();
 
-            Button attack = new Button(TartarusGame.SmallFont.FindTexture("attack"), () => 
+            Button attack = new Button(SmallFont.FindTexture("attack"), () => 
             {
                 currentSkill = Skill.Attack;
                 CurrentChoice = targets;
             });
-            Button gun = new Button(TartarusGame.SmallFont.FindTexture("gun"), () =>
+            Button gun = new Button(SmallFont.FindTexture("gun"), () =>
             {
                 currentSkill = Skill.Gun;
                 CurrentChoice = targets;
             });
-            Button skill = new Button(TartarusGame.SmallFont.FindTexture("skill"), () =>
+            Button skill = new Button(SmallFont.FindTexture("skill"), () =>
             {
                 CurrentChoice = skills;
             });
-            Button item = new Button(TartarusGame.SmallFont.FindTexture("item"), () =>
+            Button item = new Button(SmallFont.FindTexture("item"), () =>
             {
                 if (CurrentActor.HeldItem != null)
                     currentSkill = CurrentActor.HeldItem.Skill;
                 CurrentChoice = targets;
             });
-            Button guard = new Button(TartarusGame.SmallFont.FindTexture("guard"), () =>
+            Button guard = new Button(SmallFont.FindTexture("guard"), () =>
             {
                 currentSkill = Skill.Guard;
                 CurrentChoice = targets;
             });
-            Button pass = new Button(TartarusGame.SmallFont.FindTexture("pass"), () =>
+            Button pass = new Button(SmallFont.FindTexture("pass"), () =>
             {
                 currentSkill = Skill.Pass;
                 CurrentChoice = targets;
@@ -134,7 +135,7 @@ namespace Tartarus
             skills.Clear();
             foreach (var item in Encounter.CurrentActor.Skills.NonBasicSkills)
             {
-                Button temp = new Button(TartarusGame.SmallFont.FindTexture(item.Name), () => 
+                Button temp = new Button(SmallFont.FindTexture(item.Name), () => 
                 {
                     currentSkill = item;
                     CurrentChoice = targets;
@@ -162,7 +163,7 @@ namespace Tartarus
             {
                 foreach (var member in Encounter.InactiveParty)
                 {
-                    Button temp = new Button(TartarusGame.SmallFont.FindTexture(member.Name), () =>
+                    Button temp = new Button(SmallFont.FindTexture(member.Name), () =>
                     {
                         currentTarget = member;
                         Proceed();
@@ -175,7 +176,7 @@ namespace Tartarus
             }
             else if (target == Targets.EnemyParty)
             {
-                Button temp = new Button(TartarusGame.SmallFont.FindTexture("Enemy Party"), () =>
+                Button temp = new Button(SmallFont.FindTexture("Enemy Party"), () =>
                 {
                     currentTarget = Encounter.InactiveParty.FirstLivingActor;
                     Proceed();
@@ -187,7 +188,7 @@ namespace Tartarus
             }
             else if (target == Targets.AllyParty)
             {
-                Button temp = new Button(TartarusGame.SmallFont.FindTexture("Ally Party"), () =>
+                Button temp = new Button(SmallFont.FindTexture("Ally Party"), () =>
                 {
                     currentTarget = Encounter.ActiveParty.FirstLivingActor;
                     Proceed();
@@ -201,7 +202,7 @@ namespace Tartarus
             {
                 foreach (var member in Encounter.ActiveParty)
                 {
-                    Button temp = new Button(TartarusGame.SmallFont.FindTexture(member.Name), () =>
+                    Button temp = new Button(SmallFont.FindTexture(member.Name), () =>
                     {
                         currentTarget = member;
                         Proceed();
@@ -219,7 +220,7 @@ namespace Tartarus
                     if (member == CurrentActor)
                         continue;
 
-                    Button temp = new Button(TartarusGame.SmallFont.FindTexture(member.Name), () =>
+                    Button temp = new Button(SmallFont.FindTexture(member.Name), () =>
                     {
                         currentTarget = member;
                         Proceed();
@@ -233,7 +234,7 @@ namespace Tartarus
             else if (target == Targets.Self)
             {
                 var member = CurrentActor;
-                Button temp = new Button(TartarusGame.SmallFont.FindTexture(member.Name), () =>
+                Button temp = new Button(SmallFont.FindTexture(member.Name), () =>
                 {
                     currentTarget = member;
                     Proceed();
@@ -295,13 +296,13 @@ namespace Tartarus
                 CurrentChoice.Invoke();
         }
 
-        public override void Draw()
+        public override void Render()
         {
-            TartarusGame.SmallFont.Draw("Current: " + CurrentActor.Name, new Vector2(20, 10));
+            SmallFont.Draw("Current: " + CurrentActor.Name, new Vector2(20, 10));
 
-            choices.Draw();
-            skills.Draw();
-            targets.Draw();
+            choices.Render();
+            skills.Render();
+            targets.Render();
         }
 
 

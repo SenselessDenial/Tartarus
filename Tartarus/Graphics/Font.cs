@@ -19,7 +19,7 @@ namespace Tartarus
             Width = width;
             Height = height;
 
-            GTextureSheet sheet = new GTextureSheet(filename, width, height);
+            Tileset sheet = new Tileset(filename, width, height);
 
             characters.Add(' ', sheet[0]);
             for (int i = 0; i <= 11; i++)

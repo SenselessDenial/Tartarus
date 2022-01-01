@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    class Encounter
+    public class Encounter
     {
         public Party Alpha { get; private set; }
         public Party Beta { get; private set; }

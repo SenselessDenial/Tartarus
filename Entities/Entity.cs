@@ -12,8 +12,8 @@ namespace Tartarus
     {
         public Scene Scene { get; private set; }
         public ComponentList Components { get; private set; }
-        public bool IsActive { get; private set; }
-        public bool IsVisible { get; private set; }
+        public bool IsActive { get; set; }
+        public bool IsVisible { get; set; }
 
         public Vector2 Position;
 
@@ -35,8 +35,7 @@ namespace Tartarus
             set
             {
                 layer = value;
-                if (Scene != null)
-                    Scene.SetDepth(this);
+                Scene?.SetDepth(this);
             }
         }
         internal int layer;
@@ -44,8 +43,7 @@ namespace Tartarus
 
         public Entity(Scene scene, Vector2 position)
         {
-            if (scene != null)
-                scene.Add(this);
+            scene?.Add(this);
             Position = position;
             Components = new ComponentList(this);
 
@@ -87,9 +85,9 @@ namespace Tartarus
             Components.Update();
         }
 
-        public virtual void Draw()
+        public virtual void Render()
         {
-            Components.Draw();
+            Components.Render();
         }
 
         public IEnumerator<Component> GetEnumerator()

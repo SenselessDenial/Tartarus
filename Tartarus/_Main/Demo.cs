@@ -88,12 +88,12 @@ namespace Tartarus
 
         public void Draw()
         {
-            v.Draw();
+            v.Render();
 
-            TartarusGame.SmallFont.FindTexture(a.Card).Draw(new Vector2(10, 80));
-            TartarusGame.SmallFont.FindTexture(a2.Card).Draw(new Vector2(10, 135));
-            TartarusGame.SmallFont.FindTexture(b.Card).Draw(new Vector2(100, 80));
-            em.Draw();
+            Drawing.SmallFont.FindTexture(a.Card).Draw(new Vector2(10, 80));
+            Drawing.SmallFont.FindTexture(a2.Card).Draw(new Vector2(10, 135));
+            Drawing.SmallFont.FindTexture(b.Card).Draw(new Vector2(100, 80));
+            em.Render();
 
             evil_blart.Draw(new Vector2(5f * (float)Math.Cos(TartarusGame.RawTotalTime), 100));
             blart.Draw(new Vector2(20, 100));

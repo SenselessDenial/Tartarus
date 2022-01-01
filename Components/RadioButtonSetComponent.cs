@@ -7,9 +7,8 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    public class RadioButtonSet
+    public class RadioButtonSetComponent : GraphicsComponent
     {
-        public Vector2 Position { get; private set; }
         public int Spacing { get; private set; }
 
         private List<Button> buttons;
@@ -18,9 +17,7 @@ namespace Tartarus
         public int Count => buttons.Count;
         private int CurrentIndex => buttons.IndexOf(current);
 
-        public bool IsVisible = true;
-
-        public int Width
+        public override int Width
         {
             get
             {
@@ -42,7 +39,7 @@ namespace Tartarus
             }
         }
 
-        public int Height
+        public override int Height
         {
             get
             {
@@ -64,18 +61,14 @@ namespace Tartarus
             }
         }
 
-        public void Clear()
-        {
-            buttons.Clear();
-            current = null;
-        }
+        
 
-        public RadioButtonSet(Vector2 pos, bool isVertical)
+
+        public RadioButtonSetComponent(Entity entity, bool isVertical) : base(entity, true)
         {
-            Position = pos;
             buttons = new List<Button>();
-            current = null;
             Spacing = 1;
+            Offset = Vector2.Zero;
             IsVertical = isVertical;
         }
 
@@ -102,7 +95,6 @@ namespace Tartarus
                 Logger.Log("Can't move down cause current button is null.");
                 return;
             }
-            
 
             current.IsSelected = false;
             int index = CurrentIndex;
@@ -129,7 +121,7 @@ namespace Tartarus
                 Logger.Log("Can't move up cause current button is null.");
                 return;
             }
-            
+
             current.IsSelected = false;
             int index = CurrentIndex;
             for (int i = 0; i < buttons.Count; i++)
@@ -148,6 +140,12 @@ namespace Tartarus
             Logger.Log("There are no selectable buttons in this set.");
         }
 
+        public void Clear()
+        {
+            buttons.Clear();
+            current = null;
+        }
+
         public void Invoke()
         {
             if (current != null && current.IsSelectable)
@@ -158,15 +156,15 @@ namespace Tartarus
                 Logger.Log("Can't invoke because current button is not selectable.");
         }
 
-        public void Update()
+        public override void Update()
         {
             foreach (var item in buttons)
                 item.Update();
         }
 
-        public void Render()
+        public override void Render()
         {
-            Vector2 currentPos = Position;
+            Vector2 currentPos = DrawingPosition;
 
             if (IsVertical)
             {
@@ -184,9 +182,12 @@ namespace Tartarus
                     currentPos.X += item.Width + Spacing;
                 }
             }
-
-
-
+  
         }
+
+
+
+
+
     }
 }

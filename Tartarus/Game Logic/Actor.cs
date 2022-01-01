@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    class Actor
+    public class Actor
     {
         public string Name { get; private set; }
         public StatSheet Stats { get; private set; }
@@ -61,9 +61,25 @@ namespace Tartarus
         public Actor(string name)
         {
             Name = name;
-            Stats = StatSheet.Default;
+            Stats = new StatSheet(this);
             Skills = new SkillSet(this);
-            Modifiers = new ModifierList();
+            Modifiers = new ModifierList(this);
+            Party = null;
+            Level = 1;
+            XP = 0;
+
+            MaxHP = CalculateMaxHP();
+            MaxMP = CalculateMaxMP();
+        }
+
+        public Actor(string name, 
+                     int str, int mag, int end, int res, int spd, 
+                     int strWeight, int magWeight, int endWight, int resWeight, int spdWeight)
+        {
+            Name = name;
+            Stats = new StatSheet(this, str, mag, end, res, spd, strWeight, magWeight, endWight, resWeight, spdWeight);
+            Skills = new SkillSet(this);
+            Modifiers = new ModifierList(this);
             Party = null;
             Level = 1;
             XP = 0;

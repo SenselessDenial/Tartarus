@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    class Item
+    public class Item
     {
         public string Name { get; private set; }
         public Skill Skill { get; private set; }

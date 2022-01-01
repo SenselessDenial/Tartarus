@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    class Player : Actor
+    public class Player : Actor
     {
 
         public Player() : base("Player")

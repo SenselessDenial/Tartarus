@@ -37,9 +37,6 @@ namespace Tartarus
 
         public virtual void Update() { }
 
-        public virtual void Draw() { }
-
-
-
+        public virtual void Render() { }
     }
 }

@@ -60,25 +60,32 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
+    <Compile Include="CharacterSelect.cs" />
     <Compile Include="ComponentList.cs" />
+    <Compile Include="Components\RadioButtonSetComponent.cs" />
     <Compile Include="CompositeImage.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="Component.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Components\Component.cs" />
     <Compile Include="EntityList.cs" />
-    <Compile Include="GraphicsComponent.cs" />
-    <Compile Include="Image.cs" />
-    <Compile Include="Renderer.cs" />
-    <Compile Include="Scene.cs" />
+    <Compile Include="HeroPresets.cs" />
+    <Compile Include="Map\FloorNode.cs" />
+    <Compile Include="Components\GraphicsComponent.cs" />
+    <Compile Include="Components\Image.cs" />
+    <Compile Include="RunData.cs" />
+    <Compile Include="Scenes\MainMenu.cs" />
+    <Compile Include="Entities\Puppeteer.cs" />
+    <Compile Include="Tartarus\Rendering\Renderer.cs" />
+    <Compile Include="Scenes\Scene.cs" />
+    <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="Scenes\SCENE_TEMPLATE.cs" />
     <Compile Include="Tartarus\Game Logic\AI.cs" />
     <Compile Include="Tartarus\Graphics\Background.cs" />
     <Compile Include="Tartarus\Game Logic\Button.cs" />
     <Compile Include="Tartarus\Game Logic\EncounterManager.cs" />
     <Compile Include="Tartarus\Graphics\Font.cs" />
-    <Compile Include="Tartarus\Game Logic\IDrawUpdatable.cs" />
     <Compile Include="Tartarus\Game Logic\RadioButtonSet.cs" />
     <Compile Include="Tartarus\Game Logic\Item.cs" />
-    <Compile Include="Tartarus\Graphics\GraphicsItem.cs" />
-    <Compile Include="Tartarus\Graphics\GTextureSheet.cs" />
+    <Compile Include="Tartarus\Graphics\Tileset.cs" />
     <Compile Include="Tartarus\Game Logic\Encounter.cs" />
     <Compile Include="Tartarus\Game Logic\Party.cs" />
     <Compile Include="Tartarus\Game Logic\ModifierList.cs" />
@@ -103,7 +110,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tartarus\Graphics\GTexture.cs" />
     <Compile Include="Tartarus\_Main\Test.cs" />
-    <Compile Include="TestScene.cs" />
+    <Compile Include="Scenes\TestScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -130,6 +137,7 @@
     <Content Include="bin\Windows\x86\Debug\Resources\truffle.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\viennabg.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\wolf.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\wolf2.png" />
     <Content Include="Tartarus\_Main\TartarusIcon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +150,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

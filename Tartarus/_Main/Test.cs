@@ -24,7 +24,7 @@ namespace Tartarus
 
         private Player Guy;
         private Actor enemy;
-        private GTextureSheet buttons;
+        private Tileset buttons;
         private ClickableButton buttontest;
 
         private ClickableButton attack;
@@ -53,7 +53,7 @@ namespace Tartarus
 
             encounter = new Encounter(a, b);
 
-            buttons = new GTextureSheet("buttonset.png", 33, 17);
+            buttons = new Tileset("buttonset.png", 33, 17);
 
             buttonList = new List<ClickableButton>();
 
@@ -105,11 +105,11 @@ namespace Tartarus
 
         public void Draw()
         {
-            bg.Draw();
+            bg.Render();
 
             foreach (var item in buttonList)
             {
-                item.Draw();
+                item.Render();
             }
         }
     }

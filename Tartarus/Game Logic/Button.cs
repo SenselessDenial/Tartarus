@@ -7,10 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    class Button : IDrawUpdatable
+    public class Button
     {
         public GTexture Texture { get; private set; }
-        public Vector2 Position;
         public Action Action { get; private set; }
         public bool IsSelected;
         public bool IsSelectable;
@@ -18,15 +17,13 @@ namespace Tartarus
         private Color color;
         private static Color unselectedColor = new Color(180, 180, 200);
         private static Color unselectableColor = new Color(100, 100, 100);
-
         public int Width => Texture.Width;
         public int Height => Texture.Height;
 
 
-        public Button(GTexture texture, Vector2 pos, Action action, bool isSelectable)
+        public Button(GTexture texture, bool isSelectable, Action action)
         {
             Texture = texture;
-            Position = pos;
             Action = action;
             IsSelected = false;
             IsSelectable = isSelectable;
@@ -34,7 +31,7 @@ namespace Tartarus
         }
 
         public Button(GTexture texture, Action action) 
-            : this(texture, new Vector2(0,0), action, true) { }
+            : this(texture, true, action) { }
 
         public void Invoke()
         {
@@ -50,9 +47,9 @@ namespace Tartarus
                 color = Color.White;
         }
 
-        public void Draw()
+        public void Draw(Vector2 position)
         {
-            Texture.Draw(Position, color);
+            Texture.Draw(position, color);
         }
 
 

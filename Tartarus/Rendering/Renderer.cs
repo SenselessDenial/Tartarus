@@ -31,13 +31,15 @@ namespace Tartarus
             Effect = null;
         }
 
-        public void Draw()
+        public void Render()
         {
             if (Scene == null)
             {
                 Logger.Log("Scene is null. Cannot draw.");
                 return;
             }
+
+            TartarusGame.Instance.GraphicsDevice.Clear(Scene.FillColor);
 
             Drawing.SpriteBatch.Begin(SpriteSortMode.Deferred,
                                       BlendState,
@@ -47,7 +49,7 @@ namespace Tartarus
                                       Effect,
                                       Camera.Matrix);
             
-            Scene.Entities.Draw();
+            Scene.Entities.Render();
 
             Drawing.SpriteBatch.End();
             

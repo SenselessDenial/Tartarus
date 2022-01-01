@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    class SkillSet : IEnumerable<Skill>
+    public class SkillSet : IEnumerable<Skill>
     {
         private List<Skill> skills;
         public Actor Actor { get; private set; }

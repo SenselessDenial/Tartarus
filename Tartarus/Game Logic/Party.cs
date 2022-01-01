@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    class Party : IEnumerable<Actor>
+    public class Party : IEnumerable<Actor>
     {
         
         private List<Actor> actors;

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    class Background : IDrawUpdatable
+    class Background
     {
         public GTexture BGTexture { get; private set; }
 
@@ -124,7 +124,7 @@ namespace Tartarus
             prevPosition = Position;
         }
 
-        public void Draw()
+        public void Render()
         {
             foreach (var pos in drawingPositions)
                 BGTexture.Draw(pos);

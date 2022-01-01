@@ -15,12 +15,14 @@ namespace Tartarus
     static class Drawing
     {
         public static SpriteBatch SpriteBatch { get; private set; }
+        public static Font SmallFont { get; private set; }
         private static GTexture Pixel { get; set; }
 
         public static void Initialize()
         {
             SpriteBatch = new SpriteBatch(TartarusGame.Instance.GraphicsDevice);
             Pixel = new GTexture(1, 1, Color.White);
+            SmallFont = new Font("small_font.png", 4, 6);
         }
 
         public static void DrawPoint(Vector2 pos, Color color)

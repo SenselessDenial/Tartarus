@@ -12,11 +12,8 @@ namespace Tartarus
         public GTexture Texture { get; private set; }
         public Color Color = Color.White;
 
-
         public override int Width => Texture.Width;
         public override int Height => Texture.Height;
-
-
 
         public Image(Entity entity, GTexture texture)
             : base(entity, false)
@@ -30,7 +27,7 @@ namespace Tartarus
         public Image(string filename)
             : this(new GTexture(filename)) { }
 
-        public override void Draw()
+        public override void Render()
         {
             Texture.Draw(DrawingPosition, Color);
         }

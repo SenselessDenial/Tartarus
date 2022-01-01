@@ -63,7 +63,7 @@ namespace Tartarus
                 Action.Invoke();
         }
 
-        public void Draw()
+        public void Render()
         {
             current.Draw(Position, color);
         }

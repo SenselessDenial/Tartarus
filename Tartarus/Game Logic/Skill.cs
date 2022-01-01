@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    class Skill
+    public class Skill
     {
         public string Name { get; private set; }
         public SkillTypes Type { get; private set; }
@@ -81,7 +81,7 @@ namespace Tartarus
             double d = 1;
             double e = (100.0 + variance) / 100;
 
-            return (int)(a * b * c * d * e);
+            return (int)(a * b * c * d * e / 2);
         }
 
         public int CalculateDamageReduction(Actor attacker, Actor defender)

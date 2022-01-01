@@ -9,6 +9,7 @@ namespace Tartarus
 {
     public class StatSheet
     {
+        public Actor Actor { get; private set; }
         public Stat HP { get; private set; }
         public Stat MP { get; private set; }
         public Stat Strength { get; private set; }
@@ -16,7 +17,6 @@ namespace Tartarus
         public Stat Endurance { get; private set; }
         public Stat Resilience { get; private set; }
         public Stat Speed { get; private set; }
-        public static StatSheet Default => new StatSheet(10, 10, 5, 5, 5, 5, 5, 20, 20, 20, 20, 20);
 
         public int this[Stats stat]
         {
@@ -76,20 +76,25 @@ namespace Tartarus
             }
         }
 
-        public StatSheet(int hP, int mP, int strength, int magic, int endurance, int resilience, int speed,
+        public StatSheet(Actor actor, int strength, int magic, int endurance, int resilience, int speed,
                          int strWeight, int magWeight, int endWeight, int resWeight, int spdWeight)
         {
-            HP = new Stat(hP);
-            MP = new Stat(mP);
+            Actor = actor;
             Strength = new Stat(strength, 99, strWeight);
             Magic = new Stat(magic, 99, magWeight);
             Endurance = new Stat(endurance, 99, endWeight);
             Resilience = new Stat(resilience, 99, resWeight);
             Speed = new Stat(speed, 99, spdWeight);
+
+            HP = new Stat(CalculateMaxHP());
+            MP = new Stat(CalculateMaxMP());
         }
 
-        public StatSheet(int hP, int mP, int strength, int magic, int endurance, int resilience, int speed)
-            : this(hP, mP, strength, magic, endurance, resilience, speed, 20, 20, 20, 20, 20) { }
+        public StatSheet(Actor actor, int strength, int magic, int endurance, int resilience, int speed)
+            : this(actor, strength, magic, endurance, resilience, speed, 20, 20, 20, 20, 20) { }
+
+        public StatSheet(Actor actor)
+            : this(actor, 5, 5, 5, 5, 5, 20, 20, 20, 20, 20) { }
 
         public void IncrementRandom()
         {
@@ -103,6 +108,24 @@ namespace Tartarus
             this[statPool.Choose()] += 1;
         }
 
+        private int CalculateMaxHP()
+        {
+            double a = 50;
+            double b = (Math.Pow(Endurance.Value, 0.7) / 4);
+            double c = 5;
+
+            return (int)(a + b + c);
+        }
+
+        private int CalculateMaxMP()
+        {
+            double a = 20;
+            double b = (Math.Pow(Magic.Value, 0.5) / 4);
+            double c = 3;
+
+            return (int)(a + b + c);
+        }
+
         public override string ToString()
         {
             return "HP: " + HP.Value + " / " + HP.MaxValue
@@ -113,6 +136,7 @@ namespace Tartarus
                + "\nRES: " + Resilience.Value
                + "\nSPD: " + Speed.Value;
         }
+
 
 
     }

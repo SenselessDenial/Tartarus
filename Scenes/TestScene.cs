@@ -9,9 +9,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Tartarus
 {
-    class TestScene : Scene
+    public class TestScene : Scene
     {
         private Entity test;
+        private Puppeteer puppeteer;
+
         EncounterManager em;
         Encounter e;
 
@@ -27,10 +29,12 @@ namespace Tartarus
         public override void Begin()
         {
             base.Begin();
+            FillColor = Color.CornflowerBlue;
             Camera.Scale = new Vector2(4f);
 
             test = new Entity(this);
-            var im = new Image("wolf.png");
+            puppeteer = new Puppeteer(this, test);
+            var im = new Image("wolf2.png");
             test.Add(im);
             im.Offset = new Vector2(40, 40);
 
@@ -66,6 +70,9 @@ namespace Tartarus
         public override void Update()
         {
             base.Update();
+
+            
+
         }
 
 
