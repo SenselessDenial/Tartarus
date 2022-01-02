@@ -7,28 +7,28 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    public class FloorNode
+    public class RoomNode
     {
-        public List<FloorNode> NextNodes { get; private set; }
+        public List<RoomNode> NextNodes { get; private set; }
 
-        public FloorNode()
+        public RoomNode()
         {
-            NextNodes = new List<FloorNode>();
+            NextNodes = new List<RoomNode>();
         }
 
-        public void Add(FloorNode node)
+        public void Add(RoomNode node)
         {
             NextNodes.Add(node);
         }
 
-        public void Remove(FloorNode node)
+        public void Remove(RoomNode node)
         {
             NextNodes.Remove(node);
         }
 
-        public void Invoke()
+        public virtual void Invoke()
         {
-
+            Logger.Log("Nothing to see here!");
         }
 
 

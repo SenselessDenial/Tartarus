@@ -15,20 +15,21 @@ namespace Tartarus
         public bool IsOutlined = false;
         public Alignment Alignment = Alignment.Left;
          
-        public Text(Entity entity, string message, Color color, bool isOutlined, Alignment alignment) 
+        public Text(Entity entity, string message, Vector2 offset, Color color, bool isOutlined, Alignment alignment) 
             : base(entity, false) 
         {
+            Offset = offset;
             Message = message;
             Color = color;
             IsOutlined = isOutlined;
             Alignment = alignment;
         }
 
-        public Text(string message, Color color, bool isOutlined, Alignment alignment)
-            : this(null, message, color, isOutlined, alignment) { }
+        public Text(string message, Vector2 offset, Color color, bool isOutlined, Alignment alignment)
+            : this(null, message, offset, color, isOutlined, alignment) { }
 
         public Text(string message, Color color, bool isOutlined)
-            : this(null, message, color, isOutlined, Alignment.Left) { }
+            : this(message, new Vector2(0, 0), color, isOutlined, Alignment.Left) { }
 
         public override void Render()
         {

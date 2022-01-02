@@ -9,16 +9,19 @@ namespace Tartarus
     public static class RunData
     {
         public static Party PlayerParty;
+        public static Party CurrentEnemyParty;
+        public static Map Map;
         public static int Money;
-        public static int Floor;
 
+        public static int Floor => Map.Floor;
         public static bool IsGameOver => PlayerParty.IsAllDead;
 
         public static void Reset()
         {
             PlayerParty = null;
+            CurrentEnemyParty = null;
             Money = 0;
-            Floor = 1;
+            Map = new Map();
         }
 
 

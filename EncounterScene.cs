@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    public class SCENE_TEMPLATE : Scene
+    public class EncounterScene : Scene
     {
 
-        public SCENE_TEMPLATE() : base()
+        public EncounterScene() : base()
         {
             // DO NOT INITALIZE OBJECTS HERE!
         }
@@ -18,8 +18,11 @@ namespace Tartarus
         public override void Begin()
         {
             base.Begin();
-            FillColor = Color.Blue;
+            FillColor = Color.Red;
             Camera.Scale = new Vector2(4);
+
+
+            
 
         }
 

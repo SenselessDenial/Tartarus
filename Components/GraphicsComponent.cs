@@ -12,7 +12,9 @@ namespace Tartarus
         public Vector2 Offset;
         public virtual int Width { get; }
         public virtual int Height { get; }
-        protected Vector2 DrawingPosition => (Entity != null) ? Entity.Position + Offset : Offset;
+        internal Vector2 DrawingPosition => (Entity != null) ? Entity.Position + Offset : Offset;
+        public Rectangle Bounds => new Rectangle((int)DrawingPosition.X, (int)DrawingPosition.Y, Width, Height);
+        public bool IsOnScreen => (Scene != null) ? Bounds.Intersects(Scene.Camera) : false;
 
         public GraphicsComponent(Entity entity, bool isActive)
             : base(entity, isActive, true) 
@@ -21,7 +23,9 @@ namespace Tartarus
         }
 
         public GraphicsComponent() 
-            : this(null, false) { }
+            : this(null, true) { }
+
+
 
 
     }

@@ -13,7 +13,7 @@ namespace Tartarus
         public EntityList Entities { get; private set; }
         public Renderer Renderer;
         private Dictionary<int, double> depthLookup;
-        protected Camera Camera => Renderer.Camera;
+        internal Camera Camera => Renderer.Camera;
         internal Color FillColor = Color.White;
 
         public Scene()
@@ -49,9 +49,24 @@ namespace Tartarus
             Entities.Update();
         }
 
+        public virtual void BeforeRender()
+        {
+
+        }
+
         public virtual void Render()
         {
             Entities.Render();
+        }
+
+        public virtual void AfterRender()
+        {
+
+        }
+
+        protected void SetNextScene(Scene scene)
+        {
+            TartarusGame.Instance.Scene = scene;
         }
 
         internal void SetDepth(Entity entity)

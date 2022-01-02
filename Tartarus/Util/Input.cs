@@ -40,6 +40,12 @@ namespace Tartarus
         {
             return currKeyboardState.IsKeyDown(key);
         }
+
+        public static bool CheckDelayed(Keys key)
+        {
+            throw new Exception();
+
+        }
         
         public static bool Pressed(Keys key)
         {

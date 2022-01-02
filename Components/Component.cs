@@ -8,6 +8,7 @@ namespace Tartarus
 {
     public class Component
     {
+        public Scene Scene => Entity.Scene;
         public Entity Entity { get; private set; }
         public bool IsActive { get; set; }
         public bool IsVisible { get; set; }

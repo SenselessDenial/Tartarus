@@ -74,9 +74,7 @@ namespace Tartarus
             Position = new Vector2(Position.X + x, Position.Y + y);
         }
 
-
-
-
+        public static implicit operator Rectangle(Camera c) => c.Viewport.Bounds;
 
     }
 }

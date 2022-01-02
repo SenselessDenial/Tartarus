@@ -46,6 +46,7 @@ namespace Tartarus
         }
         private Scene scene;
         private Scene nextScene;
+        private Scene prevScene;
 
         public TartarusGame()
         {
@@ -90,18 +91,16 @@ namespace Tartarus
             if (Input.Check(Keys.Escape))
                 Exit();
 
-            //Demo.Update();
-
             if (Scene != null)
                 Scene.Update();
 
             if (scene != nextScene)
             {
-                var lastScene = scene;
+                prevScene = scene;
                 if (scene != null)
                     scene.End();
                 scene = nextScene;
-                OnSceneTransition(lastScene, nextScene);
+                OnSceneTransition(prevScene, nextScene);
                 if (scene != null)
                     scene.Begin();
             }

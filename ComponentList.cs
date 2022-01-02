@@ -144,6 +144,15 @@ namespace Tartarus
             IsLocked = false;
         }
 
+        public Component GetComponent(Type type)
+        {
+            foreach (var item in components)
+                if (item.GetType() == type)
+                    return item;
+
+            throw new Exception("Component type not found.");
+        }
+
         public IEnumerator<Component> GetEnumerator()
         {
             return components.GetEnumerator();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;  
-using static Tartarus.HeroPresets;
+using static Tartarus.ActorPresets;
 
 namespace Tartarus
 {
@@ -134,9 +134,10 @@ namespace Tartarus
 
                     Drawing.Font.DrawOutline(i + 1 +": " + presets[i].Actor.Name, drawPos, color);
                 }
-                    
                 drawPos.Y += 12;
             }
+
+            presets[CurrentIndex].Portrait?.Draw(new Vector2(120, 55));
         }
 
         private Comparison<HeroPreset> sortUnlocked = (x, y) =>

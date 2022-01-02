@@ -12,7 +12,9 @@ namespace Tartarus
 
         // Game Scenes
         public static MainMenu MainMenu { get; private set; }
-        public static CharacterSelect CharacterSelect { get; private set; }
+        public static CharacterSelectScene CharacterSelect { get; private set; }
+        public static MapScene MapScene { get; private set; }
+        public static EncounterScene EncounterScene { get; private set; }
 
         // Testing scenes
         public static TestScene TestScene { get; private set; }
@@ -20,7 +22,9 @@ namespace Tartarus
         public static void Initialize()
         {
             MainMenu = new MainMenu();
-            CharacterSelect = new CharacterSelect();
+            CharacterSelect = new CharacterSelectScene();
+            MapScene = new MapScene();
+            EncounterScene = new EncounterScene();
 
             TestScene = new TestScene();
         }

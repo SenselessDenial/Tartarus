@@ -59,18 +59,22 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BackgroundComponent.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CharacterPicker.cs" />
-    <Compile Include="CharacterSelect.cs" />
+    <Compile Include="CharacterSelectScene.cs" />
     <Compile Include="ComponentList.cs" />
     <Compile Include="Components\RadioButtonSetComponent.cs" />
     <Compile Include="CompositeImage.cs" />
+    <Compile Include="EncounterScene.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="EntityList.cs" />
-    <Compile Include="HeroPresets.cs" />
+    <Compile Include="ActorPresets.cs" />
     <Compile Include="Map.cs" />
-    <Compile Include="Map\FloorNode.cs" />
+    <Compile Include="MapScene.cs" />
+    <Compile Include="Map\EncounterNode.cs" />
+    <Compile Include="Map\RoomNode.cs" />
     <Compile Include="Components\GraphicsComponent.cs" />
     <Compile Include="Components\Image.cs" />
     <Compile Include="OrderedList.cs" />
@@ -78,6 +82,7 @@
     <Compile Include="RunData.cs" />
     <Compile Include="Scenes\MainMenu.cs" />
     <Compile Include="Entities\Puppeteer.cs" />
+    <Compile Include="SineWaver.cs" />
     <Compile Include="Tartarus\Rendering\Renderer.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="Tartarus\_Main\Test.cs" />
     <Compile Include="Scenes\TestScene.cs" />
     <Compile Include="Text.cs" />
+    <Compile Include="Alarm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -129,6 +135,7 @@
     <Content Include="bin\Windows\x86\Debug\Resources\blart_mini.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\box.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\buttonset.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\character_portraits.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\doclouis.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\fartholomew_mini.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\flames.png" />

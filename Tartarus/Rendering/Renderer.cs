@@ -49,7 +49,9 @@ namespace Tartarus
                                       Effect,
                                       Camera.Matrix);
 
+            Scene.BeforeRender();
             Scene.Render();
+            Scene.AfterRender();
 
             Drawing.SpriteBatch.End();
             

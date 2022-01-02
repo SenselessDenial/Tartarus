@@ -253,6 +253,7 @@ namespace Tartarus
 
         // Skills
         public static Skill Attack = new Skill("Attack", SkillTypes.Damage, Elements.Physical, Stats.Strength, Targets.Enemy, Stats.Endurance, 0, 0, 10, 90, 5);
+        public static Skill Bash = new Skill("Bash", SkillTypes.Damage, Elements.Physical, Stats.Strength, Targets.Enemy, Stats.Endurance, 3, 0, 20, 85, 10);
         public static Skill Gun = new Skill("Gun", SkillTypes.Damage, Elements.Pierce, Stats.Strength, Targets.Enemy, Stats.Endurance, 0, 0, 10, 80, 5);
         public static Skill Guard = new Skill("Guard", SkillTypes.Healing, Elements.Physical, Stats.None, Targets.Self, Stats.None, 0, 0, 0, 100, 0);
         public static Skill Pass = new Skill("Pass", SkillTypes.Healing, Elements.Physical, Stats.None, Targets.Self, Stats.None, 0, 0, 0, 100, 0);

@@ -89,6 +89,10 @@ namespace Tartarus
             Party = null;
         }
 
+        public Actor(string name,
+                     int str, int mag, int end, int res, int spd)
+            : this(name, str, mag, end, res, spd, 20, 20, 20, 20, 20) { }
+
         public void LevelUp()
         {
             Stats.LevelUp();
@@ -218,6 +222,16 @@ namespace Tartarus
         public void AddSkill(Skill skill)
         {
             Skills.Add(skill);
+        }
+
+        public void AddInnateResistance(Elements element, Resistances resistance)
+        {
+            Modifiers.AddInnateResistance(element, resistance);
+        }
+
+        public void AddInnateOffensiveBonus(Elements element, OffensiveBonuses bonus)
+        {
+            Modifiers.AddInnateOffensiveBonus(element, bonus);
         }
 
         public int CalculateXPDrop()

@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    public class SCENE_TEMPLATE : Scene
+    public class MapScene : Scene
     {
 
-        public SCENE_TEMPLATE() : base()
+        public MapScene() : base()
         {
             // DO NOT INITALIZE OBJECTS HERE!
         }
@@ -20,6 +20,7 @@ namespace Tartarus
             base.Begin();
             FillColor = Color.Blue;
             Camera.Scale = new Vector2(4);
+
 
         }
 
