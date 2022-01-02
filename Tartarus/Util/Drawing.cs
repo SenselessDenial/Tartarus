@@ -16,6 +16,8 @@ namespace Tartarus
     {
         public static SpriteBatch SpriteBatch { get; private set; }
         public static Font SmallFont { get; private set; }
+
+        public static PixelFont Font { get; private set; }
         private static GTexture Pixel { get; set; }
 
         public static void Initialize()
@@ -23,6 +25,7 @@ namespace Tartarus
             SpriteBatch = new SpriteBatch(TartarusGame.Instance.GraphicsDevice);
             Pixel = new GTexture(1, 1, Color.White);
             SmallFont = new Font("small_font.png", 4, 6);
+            Font = new PixelFont("fontboxes.png", "newfont.xml");
         }
 
         public static void DrawPoint(Vector2 pos, Color color)

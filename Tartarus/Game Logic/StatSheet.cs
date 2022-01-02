@@ -18,6 +18,14 @@ namespace Tartarus
         public Stat Resilience { get; private set; }
         public Stat Speed { get; private set; }
 
+        public int Level { get; private set; }
+        public int XP { get; set; }
+
+        public bool CanLevelUp => XP >= XPToNext;
+        public int XPToNext => XPFormula(Level);
+        private readonly Func<int, int> XPFormula = (int level) => 100 * level * (level + 1);
+        internal static int MaxLevel = 100;
+
         public int this[Stats stat]
         {
             get
@@ -76,8 +84,8 @@ namespace Tartarus
             }
         }
 
-        public StatSheet(Actor actor, int strength, int magic, int endurance, int resilience, int speed,
-                         int strWeight, int magWeight, int endWeight, int resWeight, int spdWeight)
+        private StatSheet(Actor actor, int strength, int magic, int endurance, int resilience, int speed,
+                         int strWeight, int magWeight, int endWeight, int resWeight, int spdWeight, int level, int xp)
         {
             Actor = actor;
             Strength = new Stat(strength, 99, strWeight);
@@ -86,9 +94,16 @@ namespace Tartarus
             Resilience = new Stat(resilience, 99, resWeight);
             Speed = new Stat(speed, 99, spdWeight);
 
+            Level = level;
+            XP = xp;
             HP = new Stat(CalculateMaxHP());
             MP = new Stat(CalculateMaxMP());
         }
+
+        public StatSheet(Actor actor, int strength, int magic, int endurance, int resilience, int speed,
+                         int strWeight, int magWeight, int endWeight, int resWeight, int spdWeight)
+            : this(actor, strength, magic, endurance, resilience, speed,
+                         strWeight, magWeight, endWeight, resWeight, spdWeight, 1, 0) { }
 
         public StatSheet(Actor actor, int strength, int magic, int endurance, int resilience, int speed)
             : this(actor, strength, magic, endurance, resilience, speed, 20, 20, 20, 20, 20) { }
@@ -126,6 +141,25 @@ namespace Tartarus
             return (int)(a + b + c);
         }
 
+        public void LevelUp()
+        {
+            if (Level >= MaxLevel)
+            {
+                Logger.Log(Actor.Name + " is already at max level of " + MaxLevel + ". Cannot level up.");
+                return;
+            }
+
+            if (CanLevelUp)
+                XP -= XPFormula(Level);
+            Level += 1;
+
+            for (var i = 0; i < 3; i++)
+                IncrementRandom();
+
+            HP.MaxValue = CalculateMaxHP();
+            MP.MaxValue = CalculateMaxMP();
+        }
+
         public override string ToString()
         {
             return "HP: " + HP.Value + " / " + HP.MaxValue
@@ -137,6 +171,11 @@ namespace Tartarus
                + "\nSPD: " + Speed.Value;
         }
 
+        public StatSheet Copy(Actor actor)
+        {
+            return new StatSheet(actor, Strength.Value, Magic.Value, Endurance.Value, Resilience.Value, Speed.Value,
+                                   Strength.Weight, Magic.Weight, Endurance.Weight, Resilience.Weight, Speed.Weight, Level, XP);
+        }
 
 
     }

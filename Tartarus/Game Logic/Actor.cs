@@ -17,46 +17,57 @@ namespace Tartarus
         public Party Party { get; set; }
         public Item HeldItem { get; private set; }
         public int HeldItemAmount { get; private set; }
-        public int Level { get; private set; }
-        public int XP;
-        public int XPToNext => XPFormula(Level);
-
+        
         public int HP
         {
             get => Stats.HP.Value;
             set => Stats.HP.Value = value;
         }
-
         public int MP
         {
             get => Stats.MP.Value;
             set => Stats.MP.Value = value;
         }
-
         public int MaxHP
         {
             get => Stats.HP.MaxValue;
             set => Stats.HP.MaxValue = value;
         }
-
         public int MaxMP
         {
             get => Stats.MP.MaxValue;
             set => Stats.MP.MaxValue = value;
         }
-
         public int Strength => Stats.Strength.Value;
         public int Magic => Stats.Magic.Value;
         public int Endurance => Stats.Endurance.Value;
         public int Resilience => Stats.Resilience.Value;
         public int Speed => Stats.Speed.Value;
 
-        public bool CanLevelUp => XP >= XPToNext;
+        public int Level => Stats.Level;
+        public int XP => Stats.XP;
+        public int XPToNext => Stats.XPToNext;
+        public bool CanLevelUp => Stats.CanLevelUp;
         public bool IsDead => HP <= 0;
-
         public string Card => Name + "\nHP: " + HP + "/" + MaxHP + "\nMP: " + MP + "/" + MaxMP;
 
-        private static int MaxLevel => 100;
+        private Actor()
+        {
+            Name = "UNCREATED_ACTOR";
+            Stats = null;
+            Skills = null;
+            Modifiers = null;
+            Party = null;
+        }
+
+        private void AssembleActor(Actor actor, string name, StatSheet stats, SkillSet skills, ModifierList modifiers)
+        {
+            actor.Name = name;
+            actor.Stats = stats;
+            actor.Skills = skills;
+            actor.Modifiers = modifiers;
+            actor.Party = null;
+        }
 
         public Actor(string name)
         {
@@ -65,11 +76,6 @@ namespace Tartarus
             Skills = new SkillSet(this);
             Modifiers = new ModifierList(this);
             Party = null;
-            Level = 1;
-            XP = 0;
-
-            MaxHP = CalculateMaxHP();
-            MaxMP = CalculateMaxMP();
         }
 
         public Actor(string name, 
@@ -81,30 +87,11 @@ namespace Tartarus
             Skills = new SkillSet(this);
             Modifiers = new ModifierList(this);
             Party = null;
-            Level = 1;
-            XP = 0;
-
-            MaxHP = CalculateMaxHP();
-            MaxMP = CalculateMaxMP();
         }
 
         public void LevelUp()
         {
-            if (Level >= MaxLevel)
-            {
-                Logger.Log(Name + " is already at max level of " + MaxLevel + ". Cannot level up.");
-                return;
-            }
-
-            if (CanLevelUp)
-                XP -= XPFormula(Level);
-            Level += 1;
-            
-            for (var i = 0; i < 3; i++)
-                Stats.IncrementRandom();
-
-            MaxHP = CalculateMaxHP();
-            MaxMP = CalculateMaxMP();
+            Stats.LevelUp();
         }
 
         public void LevelUp(int iterations)
@@ -228,30 +215,29 @@ namespace Tartarus
                 Logger.Log(Name + " is dead!");
         }
 
-        private int CalculateMaxHP()
-        {
-            double a = 50;
-            double b = (Math.Pow(Endurance, 0.7) / 4) * Level;
-            double c = 5 * Level;
-
-            return (int)(a + b + c);
-        }
-
-        private int CalculateMaxMP()
-        {
-            double a = 20;
-            double b = (Math.Pow(Magic, 0.5) / 4) * Level;
-            double c = 3 * Level;
-
-            return (int)(a + b + c);
-        }
-
         public void AddSkill(Skill skill)
         {
             Skills.Add(skill);
         }
 
-        private Func<int, int> XPFormula = (int level) => 100 * level * (level + 1);
+        public int CalculateXPDrop()
+        {
+            double a = -0.1 * Modifiers.NumOfWeaknesses;
+            double b = 0.5 * Modifiers.NumOfResistances;
+            double c = 0.005 * (Endurance + Resilience);
+
+            return (int)(10 * Level * (1 + a + b + c));
+        }
+
+        public Actor Copy()
+        {
+            Actor temp = new Actor();
+            AssembleActor(temp, Name, Stats.Copy(temp), Skills.Copy(temp), Modifiers.Copy(temp));
+            return temp;
+        }
+        
+
+
     }
 
     public enum Resistances

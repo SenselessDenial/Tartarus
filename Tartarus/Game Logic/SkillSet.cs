@@ -9,8 +9,9 @@ namespace Tartarus
 {
     public class SkillSet : IEnumerable<Skill>
     {
-        private List<Skill> skills;
         public Actor Actor { get; private set; }
+
+        private List<Skill> skills;
         public Skill this[int index] => skills[index];
         public int Count => skills.Count;
         public List<Skill> UsableSkills => (from item in skills
@@ -54,6 +55,14 @@ namespace Tartarus
         public void SortByElement()
         {
             skills.Sort(sortElement);
+        }
+
+        public SkillSet Copy(Actor actor)
+        {
+            SkillSet temp = new SkillSet(actor);
+            foreach (var skill in skills)
+                temp.Add(skill);
+            return temp;
         }
 
         public IEnumerator<Skill> GetEnumerator()

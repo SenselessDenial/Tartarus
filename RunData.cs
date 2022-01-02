@@ -12,9 +12,7 @@ namespace Tartarus
         public static int Money;
         public static int Floor;
 
-        public static bool GameOver => PlayerParty.IsAllDead;
-
-
+        public static bool IsGameOver => PlayerParty.IsAllDead;
 
         public static void Reset()
         {

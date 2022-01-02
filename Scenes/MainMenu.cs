@@ -15,23 +15,25 @@ namespace Tartarus
         private Entity menu;
         private RadioButtonSetComponent rs;
 
+
         public MainMenu() 
             : base() { }
 
         public override void Begin()
         {
             base.Begin();
-            FillColor = Color.Black;
+            FillColor = Color.Bisque;
             Camera.Scale = new Vector2(4);
+
 
             logo = new Entity(this, new Vector2(20, 20));
             logoImage = new Image(logo, new GTexture("paul_blart.png"));
 
             menu = new Entity(this, new Vector2(40, 40));
             rs = new RadioButtonSetComponent(menu, true);
-            rs.Add(new Button(Drawing.SmallFont.FindTexture("start"), () => 
+            rs.Add(new Button("start", () => 
             { TartarusGame.Instance.Scene = SceneManager.CharacterSelect; }));
-            rs.Add(new Button(Drawing.SmallFont.FindTexture("exit"), () => { Exit(); }));
+            rs.Add(new Button("exit", () => { Exit(); }));
         }
 
         public override void End()
@@ -54,6 +56,8 @@ namespace Tartarus
         public override void Render()
         {
             base.Render();
+
+            Drawing.Font.DrawOutline("Apples and Oranges...YES!", new Vector2(0, 0), Color.Red);
 
 
         }

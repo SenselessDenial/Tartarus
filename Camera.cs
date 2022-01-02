@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Tartarus
 {
@@ -13,6 +14,7 @@ namespace Tartarus
         
         public Renderer Renderer { get; private set; }
         public Matrix Matrix { get; private set; }
+        public Viewport Viewport { get; private set; }
 
         public Vector2 Scale
         {
@@ -41,6 +43,9 @@ namespace Tartarus
         }
         private Vector2 position;
 
+        public int Width => Viewport.Width;
+        public int Height => Viewport.Height;
+
 
         public Camera(Renderer renderer)
         {
@@ -48,6 +53,7 @@ namespace Tartarus
             Matrix = Matrix.Identity;
             Scale = Vector2.One;
             Position = Vector2.Zero;
+            Viewport = new Viewport(0, 0, TartarusGame.Instance.ScreenWidth, TartarusGame.Instance.ScreenHeight);
         }
 
         public void UpdateMatrix()
@@ -56,6 +62,11 @@ namespace Tartarus
             Matrix scale = Matrix.CreateScale(Scale.X, Scale.Y, 1f);
 
             Matrix = scale * translate * Matrix.Identity;
+
+            Viewport = new Viewport((int)Position.X,
+                                    (int)Position.Y,
+                                    (int)(TartarusGame.Instance.ScreenWidth / Scale.X),
+                                    (int)(TartarusGame.Instance.ScreenHeight / Scale.Y));
         }
 
         public void Translate(float x, float y)

@@ -119,5 +119,14 @@ namespace Tartarus
             return GetEnumerator();
         }
 
+        public int CalculateXPDrop()
+        {
+            int temp = 0;
+            foreach (var item in actors)
+                temp += item.CalculateXPDrop();
+            return temp;
+        }
+
+
     }
 }

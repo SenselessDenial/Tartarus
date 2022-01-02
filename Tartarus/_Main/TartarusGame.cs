@@ -116,7 +116,7 @@ namespace Tartarus
             //GraphicsDevice.Clear(BGColor);
 
             if (Scene != null)
-                Scene.Render();
+                Scene.Renderer.Render();
 
             base.Draw(gameTime);
         }

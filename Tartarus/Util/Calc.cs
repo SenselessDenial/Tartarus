@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Microsoft.Xna.Framework;
 
 namespace Tartarus
@@ -81,7 +82,32 @@ namespace Tartarus
             return (float)Math.Atan(yDiff / xDiff);
         }
 
+        #region XML
 
-        
+        public static XmlDocument XmlFromString(string file)
+        {
+            XmlDocument temp = new XmlDocument();
+            temp.Load(file);
+            return temp;
+        }
+
+        public static bool HasAttr(this XmlElement xml, string attribute)
+        {
+            return xml.Attributes[attribute] != null;
+        }
+
+        public static int AttrInt(this XmlElement xml, string attribute)
+        {
+            if (!xml.HasAttr(attribute))
+            {
+                throw new Exception("Attribute does not exist.");
+            }
+            return Convert.ToInt32(xml.GetAttribute(attribute));
+        }
+
+        #endregion
+
+
+
     }
 }

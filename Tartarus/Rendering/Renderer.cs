@@ -48,8 +48,8 @@ namespace Tartarus
                                       RasterizerState,
                                       Effect,
                                       Camera.Matrix);
-            
-            Scene.Entities.Render();
+
+            Scene.Render();
 
             Drawing.SpriteBatch.End();
             

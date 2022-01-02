@@ -34,6 +34,12 @@ namespace Tartarus
             ClipRect = new Rectangle(x, y, width, height);
         }
 
+        public GTexture(GTexture parent, Rectangle clipRect)
+        {
+            Texture = parent.Texture;
+            ClipRect = clipRect;
+        }
+
         public GTexture(int width, int height, Color color)
         {
             Texture = new Texture2D(TartarusGame.Instance.GraphicsDevice, width, height);
@@ -62,6 +68,28 @@ namespace Tartarus
         public void Draw(Vector2 pos)
         {
             Draw(pos, Color.White, 0f, new Vector2(0, 0), new Vector2(1, 1));
+        }
+
+        public void DrawOutline(Vector2 pos, Color color)
+        {
+            
+            for (int i = -1; i <= 1; i++)
+                for (int j = -1; j <= 1; j++)
+                {
+                    Draw(pos + new Vector2(i, j), Color.Black);
+                }
+
+            Draw(pos, color);
+        }
+
+        public static GTexture FromParent(GTexture parent, Rectangle clipRect)
+        {
+            return new GTexture(parent, clipRect);
+        }
+
+        public GTexture GetSubtexture(int x, int y, int width, int height)
+        {
+            return new GTexture(this, x, y, width, height);
         }
 
         public void Dispose()

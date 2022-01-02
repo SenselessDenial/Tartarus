@@ -12,6 +12,13 @@ namespace Tartarus
         private Dictionary<Elements, Resistances> innateResistances;
         private Dictionary<Elements, OffensiveBonuses> innateOffensiveBonuses;
 
+        public int NumOfWeaknesses => (from item in innateResistances
+                                       where item.Value == Resistances.Weak
+                                       select item).Count();
+
+        public int NumOfResistances => (from item in innateResistances
+                                       where item.Value == Resistances.Strong
+                                       select item).Count();
 
         public ModifierList(Actor actor)
         {
@@ -50,7 +57,15 @@ namespace Tartarus
             return innateOffensiveBonuses.ContainsKey(element) ? innateOffensiveBonuses[element] : OffensiveBonuses.None;
         }
 
-
+        public ModifierList Copy(Actor actor)
+        {
+            ModifierList temp = new ModifierList(actor);
+            foreach (var item in innateResistances)
+                temp.AddInnateResistance(item.Key, item.Value);
+            foreach (var item in innateOffensiveBonuses)
+                temp.AddInnateOffensiveBonus(item.Key, item.Value);
+            return temp;
+        }
 
 
     }

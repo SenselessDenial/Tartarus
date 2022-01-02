@@ -11,7 +11,7 @@ namespace Tartarus
     public class Scene : IEnumerable<Entity>
     {
         public EntityList Entities { get; private set; }
-        protected Renderer Renderer;
+        public Renderer Renderer;
         private Dictionary<int, double> depthLookup;
         protected Camera Camera => Renderer.Camera;
         internal Color FillColor = Color.White;
@@ -51,7 +51,7 @@ namespace Tartarus
 
         public virtual void Render()
         {
-            Renderer.Render();
+            Entities.Render();
         }
 
         internal void SetDepth(Entity entity)
