@@ -28,25 +28,28 @@ namespace Tartarus
 
         private bool UpToDate => prevDrawingPosition == DrawingPosition;
 
-        public BackgroundComponent(GTexture bGTexture, Vector2 offset, bool loopX, bool loopY) : base()
+        public BackgroundComponent(Entity entity, GTexture bGTexture, Vector2 offset, bool loopX, bool loopY) : base()
         {
+            drawingPositions = new List<Vector2>();
             BGTexture = bGTexture;
             Offset = offset;
             LoopX = loopX;
             LoopY = loopY;
+            entity?.Add(this);
 
             prevDrawingPosition = DrawingPosition;
-            drawingPositions = new List<Vector2>();
         }
 
+        public BackgroundComponent(Entity entity, GTexture bGTexture)
+            : this(entity, bGTexture, new Vector2(0,0), true, true) { }
+
         public BackgroundComponent(GTexture bGTexture)
-            : this(bGTexture, new Vector2(0, 0), true, true) { }
+            : this(null, bGTexture, new Vector2(0, 0), true, true) { }
 
         private List<float> FindPointsX()
         {
             List<float> points = new List<float>();
-            if (IsOnScreen)
-                points.Add(DrawingPosition.X);
+            points.Add(DrawingPosition.X);
 
             float temp = DrawingPosition.X;
             while (true)
@@ -54,6 +57,8 @@ namespace Tartarus
                 temp += BGTexture.Width;
                 if (temp > Scene.Camera.Viewport.Width + Scene.Camera.Viewport.X)
                     break;
+                else if (temp + BGTexture.Width < Scene.Camera.Viewport.X)
+                    continue;
                 else
                     points.Add(temp);
             }
@@ -64,6 +69,8 @@ namespace Tartarus
                 temp -= BGTexture.Width;
                 if (temp + BGTexture.Width < Scene.Camera.Viewport.X)
                     break;
+                else if (temp > Scene.Camera.Viewport.Width + Scene.Camera.Viewport.X)
+                    continue;
                 else
                     points.Add(temp);
             }
@@ -73,8 +80,7 @@ namespace Tartarus
         private List<float> FindPointsY()
         {
             List<float> points = new List<float>();
-            if (IsOnScreen)
-                points.Add(DrawingPosition.Y);
+            points.Add(DrawingPosition.Y);
 
             float temp = DrawingPosition.Y;
             while (true)
@@ -82,6 +88,8 @@ namespace Tartarus
                 temp += BGTexture.Height;
                 if (temp > Scene.Camera.Viewport.Height + Scene.Camera.Viewport.Y)
                     break;
+                else if (temp + BGTexture.Height < Scene.Camera.Viewport.Y)
+                    continue;
                 else
                     points.Add(temp);
             }
@@ -92,6 +100,8 @@ namespace Tartarus
                 temp -= BGTexture.Height;
                 if (temp + BGTexture.Height < Scene.Camera.Viewport.Y)
                     break;
+                else if (temp > Scene.Camera.Viewport.Height + Scene.Camera.Viewport.Y)
+                    continue;
                 else
                     points.Add(temp);
             }
@@ -108,14 +118,12 @@ namespace Tartarus
             if (LoopX)
                 xPos = FindPointsX();
             else
-                if (IsOnScreen)
-                    xPos.Add(DrawingPosition.X);
+                xPos.Add(DrawingPosition.X);
 
             if (LoopY)
                 yPos = FindPointsY();
-            else
-                if (IsOnScreen)
-                    yPos.Add(DrawingPosition.Y);
+            else 
+                yPos.Add(DrawingPosition.Y);
 
             drawingPositions = Calc.FindAllPermutations(xPos, yPos);
         }
@@ -130,8 +138,6 @@ namespace Tartarus
 
         public override void Render()
         {
-            //Logger.Log(drawingPositions.Count);
-
             foreach (var pos in drawingPositions)
                 BGTexture.Draw(pos);
         }

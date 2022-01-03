@@ -77,13 +77,14 @@ namespace Tartarus
 
         public struct HeroPreset
         {
-            public Actor Actor;
+            public Actor Actor => actor.Copy();
             public bool IsUnlocked;
             public GTexture Portrait;
+            public Actor actor;
 
             public HeroPreset(Actor actor, bool isUnlocked, GTexture portrait)
             {
-                Actor = actor;
+                this.actor = actor;
                 IsUnlocked = isUnlocked;
                 Portrait = portrait;
             }
@@ -94,11 +95,12 @@ namespace Tartarus
 
         public struct EnemyPreset
         {
-            public Actor Actor;
+            public Actor Actor => actor.Copy();
+            private Actor actor;
 
             public EnemyPreset(Actor actor)
             {
-                Actor = actor;
+                this.actor = actor;
             }
 
 

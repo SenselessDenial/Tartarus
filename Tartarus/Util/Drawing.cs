@@ -62,6 +62,19 @@ namespace Tartarus
 
         }
 
+        public static void DrawLinePlus(Vector2 start, Vector2 end, Color color)
+        {
+            Vector2 slope = end - start;
+            slope = slope.NormalizeSquare();
+            Vector2 increment = Vector2.Zero;
+
+            while (Vector2.Distance(start, start+increment) < Vector2.Distance(start, end))
+            {
+                Pixel.Draw(new Vector2((int)(start.X + increment.X), (int)(start.Y + increment.Y)), color);
+                increment += slope;
+            }
+        }
+
 
 
 

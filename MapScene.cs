@@ -9,6 +9,8 @@ namespace Tartarus
 {
     public class MapScene : Scene
     {
+        private MapReader reader;
+
 
         public MapScene() : base()
         {
@@ -22,13 +24,14 @@ namespace Tartarus
             Camera.Scale = new Vector2(4);
 
 
+            reader = new MapReader(this);
         }
 
         public override void End()
         {
             base.End();
 
-
+            Entities.Clear();
         }
 
         public override void Update()
@@ -42,7 +45,7 @@ namespace Tartarus
         {
             base.Render();
 
-
+            RunData.Map.Draw(new Vector2(50, 50));
         }
 
 

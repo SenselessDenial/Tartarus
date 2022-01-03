@@ -51,6 +51,7 @@ namespace Tartarus
                 rs.MovePrevious();
             if (Input.Pressed(MappedKeys.A) || Input.Pressed(MappedKeys.Start))
                 rs.Invoke();
+
         }
 
         public override void Render()
@@ -58,7 +59,6 @@ namespace Tartarus
             base.Render();
 
             Drawing.Font.DrawOutline("Apples and Oranges...YES!", new Vector2(0, 0), Color.Red);
-
 
         }
 

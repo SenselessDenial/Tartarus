@@ -37,6 +37,8 @@ namespace Tartarus
         {
             base.Update();
 
+            if (Input.Pressed(MappedKeys.A))
+                SetNextScene(SceneManager.MapScene);
 
         }
 

@@ -107,6 +107,16 @@ namespace Tartarus
 
         #endregion
 
+        public static Vector2 NormalizeSquare(this Vector2 vector)
+        {
+            Vector2 v = vector;
+            v.Normalize();
+            float scalar = v.X >= v.Y ? 1 / v.X : 1 / v.Y;
+            v.X *= scalar;
+            v.Y *= scalar;
+            return v;
+        }
+
 
 
     }

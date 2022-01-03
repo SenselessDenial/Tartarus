@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    class Tileset
+    public class Tileset
     {
         public GTexture Parent { get; private set; }
         private GTexture[,] textures;

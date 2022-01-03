@@ -29,6 +29,8 @@ namespace Tartarus
             Camera.Scale = new Vector2(4);
 
             ActorPresets.Begin();
+            RunData.Reset();
+
 
             picker = new CharacterPicker(this);
             picker.Position = new Vector2(20, 20);
@@ -39,7 +41,7 @@ namespace Tartarus
             picker.Add(ActorPresets.Gabriel);
 
             helper = new Entity(this);
-            background = new BackgroundComponent(new GTexture("viennabg.png"));
+            background = new BackgroundComponent(helper, new GTexture("viennabg.png"));
             helper.Add(background);
             pressStart = new Text("PRESS START TO BEGIN",
                 new Vector2(Camera.Width / 2, Camera.Height - 20),
@@ -69,7 +71,7 @@ namespace Tartarus
                 SetNextScene(SceneManager.MapScene);
             }
 
-            background.Offset += new Vector2(0.2f, 0.1f);
+            background.Offset += new Vector2(1f, 0.5f);
             pressStart.Offset.Y = waver.value;
         }
 

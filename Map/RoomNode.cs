@@ -10,6 +10,12 @@ namespace Tartarus
     public class RoomNode
     {
         public List<RoomNode> NextNodes { get; private set; }
+        public static GTexture NodeTexture => RunData.Map.NodeTextures[0];
+
+        public virtual GTexture Texture => NodeTexture;
+        public RoomNode this[int index] => index >= 0 && index < NextNodes.Count
+                    ? NextNodes[index]
+                    : null;
 
         public RoomNode()
         {

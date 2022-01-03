@@ -84,10 +84,10 @@ namespace Tartarus
 
         public void CreateParty()
         {
-            Actor a = presets[0].Actor.Copy();
-            Actor b = presets[1].Actor.Copy();
-            Actor c = presets[2].Actor.Copy();
-            Actor d = presets[3].Actor.Copy();
+            Actor a = presets[0].Actor;
+            Actor b = presets[1].Actor;
+            Actor c = presets[2].Actor;
+            Actor d = presets[3].Actor;
 
             RunData.PlayerParty = new Party(a, b, c, d);
             Logger.Log("Party Created!");

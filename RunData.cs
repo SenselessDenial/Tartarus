@@ -13,7 +13,7 @@ namespace Tartarus
         public static Map Map;
         public static int Money;
 
-        public static int Floor => Map.Floor;
+        public static int Floor => Map.FloorNum;
         public static bool IsGameOver => PlayerParty.IsAllDead;
 
         public static void Reset()

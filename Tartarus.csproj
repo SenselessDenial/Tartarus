@@ -72,6 +72,7 @@
     <Compile Include="EntityList.cs" />
     <Compile Include="ActorPresets.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="MapReader.cs" />
     <Compile Include="MapScene.cs" />
     <Compile Include="Map\EncounterNode.cs" />
     <Compile Include="Map\RoomNode.cs" />
@@ -143,6 +144,7 @@
     <Content Include="bin\Windows\x86\Debug\Resources\Imposter_enemy.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\newfont.xml" />
     <Content Include="bin\Windows\x86\Debug\Resources\newicon.ico" />
+    <Content Include="bin\Windows\x86\Debug\Resources\nodes.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\paul_blart.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\rainbow.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\rain_texture.png" />

@@ -151,6 +151,13 @@ namespace Tartarus
                 Remove(entity);
         }
 
+        public void Clear()
+        {
+            entities.Clear();
+            toAdd.Clear();
+            toRemove.Clear();
+        }
+
         internal void Update()
         {
             IsLocked = true;
