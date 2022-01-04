@@ -10,7 +10,6 @@ namespace Tartarus
     public class Image : GraphicsComponent, IDisposable
     {
         public GTexture Texture { get; private set; }
-        public Color Color = Color.White;
 
         public override int Width => Texture.Width;
         public override int Height => Texture.Height;

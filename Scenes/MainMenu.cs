@@ -15,14 +15,13 @@ namespace Tartarus
         private Entity menu;
         private RadioButtonSetComponent rs;
 
-
         public MainMenu() 
             : base() { }
 
         public override void Begin()
         {
             base.Begin();
-            FillColor = Color.Bisque;
+            FillColor = Color.LawnGreen;
             Camera.Scale = new Vector2(4);
 
 
@@ -58,7 +57,6 @@ namespace Tartarus
         {
             base.Render();
 
-            Drawing.Font.DrawOutline("Apples and Oranges...YES!", new Vector2(0, 0), Color.Red);
 
         }
 

@@ -50,79 +50,74 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Tartarus\_Main\TartarusIcon.ico</ApplicationIcon>
+    <ApplicationIcon>_Main\TartarusIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationManifest>_Main\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BackgroundComponent.cs" />
-    <Compile Include="Camera.cs" />
-    <Compile Include="CharacterPicker.cs" />
-    <Compile Include="CharacterSelectScene.cs" />
-    <Compile Include="ComponentList.cs" />
+    <Compile Include="Components\Background.cs" />
+    <Compile Include="Rendering\Camera.cs" />
+    <Compile Include="Entities\CharacterPicker.cs" />
+    <Compile Include="Scenes\CharacterSelectScene.cs" />
+    <Compile Include="Entities\Base\ComponentList.cs" />
     <Compile Include="Components\RadioButtonSetComponent.cs" />
-    <Compile Include="CompositeImage.cs" />
-    <Compile Include="EncounterScene.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Components\Component.cs" />
-    <Compile Include="EntityList.cs" />
-    <Compile Include="ActorPresets.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="MapReader.cs" />
-    <Compile Include="MapScene.cs" />
-    <Compile Include="Map\EncounterNode.cs" />
-    <Compile Include="Map\RoomNode.cs" />
-    <Compile Include="Components\GraphicsComponent.cs" />
+    <Compile Include="Entities\EncounterEntity.cs" />
+    <Compile Include="Scenes\EncounterScene.cs" />
+    <Compile Include="Actors\Enemy.cs" />
+    <Compile Include="Entities\Base\Entity.cs" />
+    <Compile Include="Components\Base\Component.cs" />
+    <Compile Include="Scenes\Base\EntityList.cs" />
+    <Compile Include="Actors\ActorPresets.cs" />
+    <Compile Include="Actors\Hero.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Entities\MapReader.cs" />
+    <Compile Include="Scenes\MapScene.cs" />
+    <Compile Include="Maps\EncounterNode.cs" />
+    <Compile Include="Maps\RoomNode.cs" />
+    <Compile Include="Components\Base\GraphicsComponent.cs" />
     <Compile Include="Components\Image.cs" />
-    <Compile Include="OrderedList.cs" />
-    <Compile Include="PixelFont.cs" />
-    <Compile Include="RunData.cs" />
+    <Compile Include="Graphics\PixelFont.cs" />
+    <Compile Include="Utility\RunData.cs" />
     <Compile Include="Scenes\MainMenu.cs" />
-    <Compile Include="Entities\Puppeteer.cs" />
-    <Compile Include="SineWaver.cs" />
-    <Compile Include="Tartarus\Rendering\Renderer.cs" />
-    <Compile Include="Scenes\Scene.cs" />
+    <Compile Include="XtraUnsorted\Puppeteer.cs" />
+    <Compile Include="Components\SineWaver.cs" />
+    <Compile Include="Rendering\Renderer.cs" />
+    <Compile Include="Scenes\Base\Scene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
     <Compile Include="Scenes\SCENE_TEMPLATE.cs" />
-    <Compile Include="Tartarus\Game Logic\AI.cs" />
-    <Compile Include="Tartarus\Graphics\Background.cs" />
-    <Compile Include="Tartarus\Game Logic\Button.cs" />
-    <Compile Include="Tartarus\Game Logic\EncounterManager.cs" />
-    <Compile Include="Tartarus\Graphics\Font.cs" />
-    <Compile Include="Tartarus\Game Logic\RadioButtonSet.cs" />
-    <Compile Include="Tartarus\Game Logic\Item.cs" />
-    <Compile Include="Tartarus\Graphics\Tileset.cs" />
-    <Compile Include="Tartarus\Game Logic\Encounter.cs" />
-    <Compile Include="Tartarus\Game Logic\Party.cs" />
-    <Compile Include="Tartarus\Game Logic\ModifierList.cs" />
-    <Compile Include="Tartarus\Game Logic\StatSheet.cs" />
-    <Compile Include="Tartarus\Game Logic\Stat.cs" />
-    <Compile Include="Tartarus\Xtra\ChoicePool.cs" />
-    <Compile Include="Tartarus\Game Logic\Actor.cs" />
-    <Compile Include="Tartarus\Interactives\BoxCollider.cs" />
-    <Compile Include="Tartarus\Interactives\ClickableButton.cs" />
-    <Compile Include="Tartarus\Util\Calc.cs" />
-    <Compile Include="Tartarus\Util\Drawing.cs" />
-    <Compile Include="Tartarus\Xtra\HashCounter.cs" />
-    <Compile Include="Tartarus\Util\Input.cs" />
-    <Compile Include="Tartarus\_Main\Demo.cs" />
-    <Compile Include="Tartarus\_Main\Overlord.cs" />
-    <Compile Include="Tartarus\Game Logic\Player.cs" />
-    <Compile Include="Tartarus\Game Logic\Skill.cs" />
-    <Compile Include="Tartarus\Game Logic\SkillSet.cs" />
-    <Compile Include="Tartarus\_Main\TartarusGame.cs" />
-    <Compile Include="Tartarus\Util\Logger.cs" />
-    <Compile Include="Tartarus\_Main\Program.cs" />
+    <Compile Include="XtraUnsorted\Button.cs" />
+    <Compile Include="Components\EncounterManager.cs" />
+    <Compile Include="XtraUnsorted\Font.cs" />
+    <Compile Include="XtraUnsorted\RadioButtonSet.cs" />
+    <Compile Include="Actors\Items\Item.cs" />
+    <Compile Include="Graphics\Tileset.cs" />
+    <Compile Include="XtraUnsorted\Encounter.cs" />
+    <Compile Include="Actors\Parties\Party.cs" />
+    <Compile Include="Actors\Modifiers\ModifierList.cs" />
+    <Compile Include="Actors\Stats\StatSheet.cs" />
+    <Compile Include="Actors\Stats\Stat.cs" />
+    <Compile Include="XtraUnsorted\ChoicePool.cs" />
+    <Compile Include="Actors\Actor.cs" />
+    <Compile Include="XtraUnsorted\BoxCollider.cs" />
+    <Compile Include="XtraUnsorted\ClickableButton.cs" />
+    <Compile Include="Utility\Calc.cs" />
+    <Compile Include="Utility\Drawing.cs" />
+    <Compile Include="XtraUnsorted\HashCounter.cs" />
+    <Compile Include="Utility\Input.cs" />
+    <Compile Include="Actors\Skills\Skill.cs" />
+    <Compile Include="Actors\Skills\SkillSet.cs" />
+    <Compile Include="_Main\TartarusGame.cs" />
+    <Compile Include="Utility\Logger.cs" />
+    <Compile Include="_Main\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tartarus\Graphics\GTexture.cs" />
-    <Compile Include="Tartarus\_Main\Test.cs" />
-    <Compile Include="Scenes\TestScene.cs" />
-    <Compile Include="Text.cs" />
-    <Compile Include="Alarm.cs" />
+    <Compile Include="Graphics\GTexture.cs" />
+    <Compile Include="Components\Text.cs" />
+    <Compile Include="Components\Alarm.cs" />
+    <Compile Include="Scenes\WinScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -141,6 +136,7 @@
     <Content Include="bin\Windows\x86\Debug\Resources\fartholomew_mini.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\flames.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\fontboxes.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\heroicons.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\Imposter_enemy.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\newfont.xml" />
     <Content Include="bin\Windows\x86\Debug\Resources\newicon.ico" />
@@ -152,12 +148,13 @@
     <Content Include="bin\Windows\x86\Debug\Resources\testimage.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\truffle.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\viennabg.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\viennabg2.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\wolf.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\wolf2.png" />
-    <Content Include="Tartarus\_Main\TartarusIcon.ico" />
+    <Content Include="_Main\TartarusIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.manifest" />
+    <None Include="_Main\app.manifest" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

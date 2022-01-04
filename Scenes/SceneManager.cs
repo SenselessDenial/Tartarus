@@ -15,9 +15,9 @@ namespace Tartarus
         public static CharacterSelectScene CharacterSelect { get; private set; }
         public static MapScene MapScene { get; private set; }
         public static EncounterScene EncounterScene { get; private set; }
+        public static WinScene WinScene { get; private set; }
 
         // Testing scenes
-        public static TestScene TestScene { get; private set; }
 
         public static void Initialize()
         {
@@ -25,8 +25,8 @@ namespace Tartarus
             CharacterSelect = new CharacterSelectScene();
             MapScene = new MapScene();
             EncounterScene = new EncounterScene();
+            WinScene = new WinScene();
 
-            TestScene = new TestScene();
         }
 
 
