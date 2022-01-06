@@ -25,6 +25,7 @@ namespace Tartarus
         }
         public void ReceiveMoney(int money)
         {
+            Logger.Log("The party has received " + money + " money.");
             RunData.Money += money;
         }
 

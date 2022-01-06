@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Tartarus
 {
@@ -144,6 +147,21 @@ namespace Tartarus
             color.B = (byte)((a.B * b.B) / 255);
             color.A = (byte)((a.A * b.A) / 255);
             return color;
+        }
+
+        public static Song SongFromFile(string name, string file)
+        {
+            return Song.FromUri(name, new Uri("file:///" + Path.Combine(TartarusGame.ResourceFolderPath, file)));
+        }
+
+
+        public static SoundEffect SFXFromFile(string file)
+        {
+            var filename = Path.Combine(TartarusGame.ResourceFolderPath, file);
+            var fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var sfx = SoundEffect.FromStream(fileStream);
+            fileStream.Close();
+            return sfx;
         }
 
     }

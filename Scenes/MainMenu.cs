@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Tartarus
 {
@@ -14,7 +15,8 @@ namespace Tartarus
         private Image logoImage;
         private Entity menu;
         private RadioButtonSetComponent rs;
-
+        SoundEffect abc;
+        
         public MainMenu() 
             : base() { }
 
@@ -23,7 +25,7 @@ namespace Tartarus
             base.Begin();
             FillColor = Color.LawnGreen;
             Camera.Scale = new Vector2(4);
-
+            abc = Calc.SFXFromFile("mouseClick.wav");
 
             logo = new Entity(this, new Vector2(20, 20));
             logoImage = new Image(logo, new GTexture("paul_blart.png"));
@@ -31,7 +33,7 @@ namespace Tartarus
             menu = new Entity(this, new Vector2(40, 40));
             rs = new RadioButtonSetComponent(menu, true);
             rs.Add(new Button("start", () => 
-            { TartarusGame.Instance.Scene = SceneManager.CharacterSelect; }));
+            { SetNextScene(SceneManager.CharacterSelect); }));
             rs.Add(new Button("exit", () => { Exit(); }));
         }
 
@@ -45,9 +47,15 @@ namespace Tartarus
             base.Update();
 
             if (Input.Pressed(MappedKeys.Down))
+            {
+                abc.Play();
                 rs.MoveNext();
+            }   
             if (Input.Pressed(MappedKeys.Up))
+            {
+                abc.Play();
                 rs.MovePrevious();
+            }
             if (Input.Pressed(MappedKeys.A) || Input.Pressed(MappedKeys.Start))
                 rs.Invoke();
 

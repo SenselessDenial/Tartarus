@@ -12,6 +12,7 @@ namespace Tartarus
         Entity entity;
         TimingDiagram t;
         Image im;
+        GSong gs;
 
         public TitleScreenScene() : base()
         {
@@ -26,12 +27,16 @@ namespace Tartarus
 
             entity = new Entity(this);
             entity.Position = new Vector2(Camera.Width / 2, Camera.Height / 2);
-            im = new Image(entity, new GTexture("buttonset.png"));
-            im.Offset = new Vector2(-im.Width / 2, -im.Height / 2);
+            im = new Image(entity, new GTexture("fazbeargaming.png"), Image.DrawAlignment.Center);
             t = new TimingDiagram(entity);
-            t.Add(0, 1, 2, Ease.BounceOut);
+            t.Add(0, 255, 3, Ease.SineOut);
             t.AddMaintain(1);
-            t.Add(1, 0, 2, Ease.BounceOut);
+            t.Add(255, 0, 3, Ease.SineIn);
+            t.AddMaintain(1);
+            t.AddAction(() => { im.Texture = new GTexture("fartholomew_mini.png"); });
+            t.Add(0, 255, 3, Ease.SineOut);
+            t.AddMaintain(1);
+            t.Add(255, 0, 3, Ease.SineIn);
             t.AddMaintain(1);
             t.AddAction(() => { SetNextScene(SceneManager.MainMenu); });
             t.Start();
@@ -48,7 +53,7 @@ namespace Tartarus
         {
             base.Update();
 
-            im.Color = new Color(255, 255, 255, (int)(t.Value * 255));
+            im.Color = new Color(255, 255, 255, (int)t.Value);
 
             if (Input.PressedAnyMappedKey())
                 SetNextScene(SceneManager.MainMenu);
