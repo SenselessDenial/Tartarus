@@ -146,7 +146,16 @@ namespace Tartarus
             return Input.Released(GetMapping(key));
         }
 
-
+        public static bool PressedAnyMappedKey()
+        {
+            return Pressed(MappedKeys.Up) ||
+                   Pressed(MappedKeys.Down) ||
+                   Pressed(MappedKeys.Left) ||
+                   Pressed(MappedKeys.Right) ||
+                   Pressed(MappedKeys.A) ||
+                   Pressed(MappedKeys.B) ||
+                   Pressed(MappedKeys.Start);
+        }
 
 
 

@@ -11,7 +11,7 @@ namespace Tartarus
     {
         public Actor Actor { get; private set; }
 
-        private List<Skill> skills;
+        private readonly List<Skill> skills;
         public Skill this[int index] => skills[index];
         public int Count => skills.Count;
         public List<Skill> UsableSkills => (from item in skills

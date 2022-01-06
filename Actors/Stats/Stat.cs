@@ -31,19 +31,13 @@ namespace Tartarus
             set
             {
                 this.value += value - maxValue;
-                if (value <= MinValue)
-                    maxValue = MinValue;
-                else
-                    maxValue = value;
+                maxValue = value <= MinValue ? MinValue : value;
                 Value = this.value;
             }
         }
         public int Weight
         {
-            get
-            {
-                return value >= maxValue ? 0 : weight;
-            }
+            get => value >= maxValue ? 0 : weight;
             private set => weight = value;
         }
         private static int MinValue => 0;

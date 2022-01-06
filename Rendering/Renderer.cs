@@ -24,7 +24,7 @@ namespace Tartarus
             Scene = scene;
             Camera = new Camera(this);
 
-            BlendState = BlendState.AlphaBlend;
+            BlendState = BlendState.NonPremultiplied;
             SamplerState = SamplerState.PointClamp;
             DepthStencilState = DepthStencilState.None;
             RasterizerState = RasterizerState.CullNone;

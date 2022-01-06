@@ -60,6 +60,11 @@ namespace Tartarus
             Drawing.SpriteBatch.Draw(Texture, pos, new Rectangle(ClipRect.X + rect.X, ClipRect.Y + rect.Y, rect.Width, rect.Height), color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
 
+        public void Draw(Vector2 pos, Vector2 origin, Color color)
+        {
+            Draw(pos, color, 0f, origin, new Vector2(1, 1));
+        }
+
         public void Draw(Vector2 pos, Color color)
         {
             Draw(pos, color, 0f, new Vector2(0, 0), new Vector2(1, 1));

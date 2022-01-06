@@ -59,7 +59,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ActorNew.cs" />
+    <Compile Include="AINew.cs" />
     <Compile Include="Components\Background.cs" />
+    <Compile Include="Ease.cs" />
+    <Compile Include="EncounterNew.cs" />
+    <Compile Include="EnemyNew.cs" />
+    <Compile Include="EnemyParty.cs" />
+    <Compile Include="HeroNew.cs" />
+    <Compile Include="HeroParty.cs" />
+    <Compile Include="ModifierListNew.cs" />
+    <Compile Include="PartyNew.cs" />
     <Compile Include="Rendering\Camera.cs" />
     <Compile Include="Entities\CharacterPicker.cs" />
     <Compile Include="Scenes\CharacterSelectScene.cs" />
@@ -81,6 +91,13 @@
     <Compile Include="Components\Base\GraphicsComponent.cs" />
     <Compile Include="Components\Image.cs" />
     <Compile Include="Graphics\PixelFont.cs" />
+    <Compile Include="SelectionMatrix.cs" />
+    <Compile Include="SkillNew.cs" />
+    <Compile Include="SkillSetNew.cs" />
+    <Compile Include="StatSheetNew.cs" />
+    <Compile Include="Scenes\TestScene.cs" />
+    <Compile Include="TimingDiagram.cs" />
+    <Compile Include="TitleScreenScene.cs" />
     <Compile Include="Utility\RunData.cs" />
     <Compile Include="Scenes\MainMenu.cs" />
     <Compile Include="XtraUnsorted\Puppeteer.cs" />
