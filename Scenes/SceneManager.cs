@@ -17,6 +17,7 @@ namespace Tartarus
         public static MapScene MapScene { get; private set; }
         public static EncounterScene EncounterScene { get; private set; }
         public static WinScene WinScene { get; private set; }
+        public static LoseScene LoseScene { get; private set; }
 
         // Testing scenes
 
@@ -29,6 +30,7 @@ namespace Tartarus
             MapScene = new MapScene();
             EncounterScene = new EncounterScene();
             WinScene = new WinScene();
+            LoseScene = new LoseScene();
 
             TestScene = new TestScene();
         }

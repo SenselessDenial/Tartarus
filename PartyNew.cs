@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public abstract class PartyNew<T> where T : ActorNew
+    public abstract class PartyNew<T> : IEnumerable<T> where T : ActorNew
     {
         protected List<T> actors = new List<T>();
         public int Count => actors.Count;
@@ -92,7 +93,30 @@ namespace Tartarus
             return actors.IndexOf(NextLivingActor(startingIndex));
         }
 
+        public int IndexOf(T actor)
+        {
+            return actors.IndexOf(actor);
+        }
 
+        public T RandomLivingActor()
+        {
+            List<T> living = new List<T>();
+            foreach (var item in actors)
+            {
+                if (!item.IsDead)
+                    living.Add(item);
+            }
+            return Calc.ChooseRandom(living);
+        }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            return ((IEnumerable<T>)actors).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)actors).GetEnumerator();
+        }
     }
 }

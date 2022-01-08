@@ -12,8 +12,29 @@ namespace Tartarus
         public GTexture Texture { get; private set; }
         public string Message { get; private set; }
         public Action Action { get; private set; }
-        public bool IsSelected = false;
-        public bool IsSelectable = true;
+        public bool IsSelected
+        {
+            get => isSelected;
+            set
+            {
+                isSelected = value;
+                color = isSelected ? Color.White : unselectedColor;
+            }
+        }
+        public bool IsSelectable
+        {
+            get => isSelectable;
+            set
+            {
+                isSelectable = value;
+                if (!isSelectable)
+                    color = unselectableColor;
+            }
+        }
+
+        private bool isSelected = false;
+        private bool isSelectable = true;
+
 
         private Color color;
         private static Color unselectedColor = new Color(180, 180, 200);
@@ -29,7 +50,6 @@ namespace Tartarus
             Action = action;
             IsSelected = false;
             IsSelectable = isSelectable;
-            color = unselectedColor;
         }
 
         public Button(GTexture texture, Action action) 
@@ -39,7 +59,8 @@ namespace Tartarus
         {
             Message = message;
             Action = action;
-            color = unselectedColor;
+            IsSelected = false;
+            IsSelectable = true;
         }
 
         public void Invoke()
@@ -62,6 +83,12 @@ namespace Tartarus
                 Drawing.Font.DrawOutline(Message, position, color);
             else
                 Texture.Draw(position, color);
+        }
+
+        public void Draw(Vector2 position, PixelFont.Alignment alignment)
+        {
+            if (Message != null)
+                Drawing.Font.DrawOutline(Message, position, color, alignment);
         }
 
 

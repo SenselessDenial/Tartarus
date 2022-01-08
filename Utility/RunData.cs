@@ -8,8 +8,8 @@ namespace Tartarus
 {
     public static class RunData
     {
-        public static Party PlayerParty;
-        public static Party CurrentEnemyParty;
+        public static HeroParty PlayerParty;
+        public static EnemyParty CurrentEnemyParty;
         public static Map Map;
         public static int Money;
 

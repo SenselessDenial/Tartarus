@@ -10,7 +10,9 @@ namespace Tartarus
     public class EncounterScene : Scene
     {
 
-        private EncounterEntity ee;
+        private EncounterNewEntity ee;
+
+        private GTexture box;
 
         public EncounterScene() : base()
         {
@@ -20,10 +22,12 @@ namespace Tartarus
         public override void Begin()
         {
             base.Begin();
-            FillColor = Color.Red;
+            FillColor = Color.DarkTurquoise;
             Camera.Scale = new Vector2(4);
 
-            ee = new EncounterEntity(this, RunData.PlayerParty, RunData.CurrentEnemyParty);
+            ee = new EncounterNewEntity(this, new EncounterNew(RunData.PlayerParty, RunData.CurrentEnemyParty, true));
+
+            box = new GTexture("herobox.png").ReplaceWithPattern(new GTexture("pattern.png"), Color.White);
         }
 
         public override void End()
@@ -40,8 +44,10 @@ namespace Tartarus
             if (Input.Pressed(Microsoft.Xna.Framework.Input.Keys.Q))
                 SetNextScene(SceneManager.MapScene);
 
-            if (ee.IsOver)
+            if (ee.HeroesWin)
                 SetNextScene(SceneManager.MapScene);
+            if (ee.EnemiesWin)
+                SetNextScene(SceneManager.LoseScene);
 
         }
 
@@ -49,6 +55,7 @@ namespace Tartarus
         {
             base.Render();
 
+            box.Draw(new Vector2(0, 0));
 
         }
 

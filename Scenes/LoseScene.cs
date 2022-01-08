@@ -7,18 +7,13 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    public class TestScene : Scene
+    public class LoseScene : Scene
     {
-        private HeroNew a;
-        private EnemyNew b;
 
-        private EncounterNew e;
+        private int score = 1234;
 
 
-
-
-
-        public TestScene() : base()
+        public LoseScene() : base()
         {
             // DO NOT INITALIZE OBJECTS HERE!
         }
@@ -26,13 +21,8 @@ namespace Tartarus
         public override void Begin()
         {
             base.Begin();
-            FillColor = Color.Lime;
+            FillColor = Color.Black;
             Camera.Scale = new Vector2(4);
-
-            a = new HeroNew("bob", 2, 2, 2, 2, 2, 1, 1, 1, 1, 1);
-            b = new EnemyNew("arg", 1, 1, 1, 1, 1, 1, 0, Affiliations.None, 20);
-
-            e = new EncounterNew(new HeroParty(a), new EnemyParty(b), true);
 
         }
 
@@ -40,21 +30,25 @@ namespace Tartarus
         {
             base.End();
 
-
+            Entities.Clear();
         }
 
         public override void Update()
         {
             base.Update();
 
+            if (Input.PressedAnyMappedKey())
+                SetNextScene(SceneManager.MainMenu);
 
-
+            score = Calc.Next(1000, 10000);
         }
 
         public override void Render()
         {
             base.Render();
 
+            Drawing.Font.Draw("You lose!", new Vector2(50, 60));
+            Drawing.Font.Draw("Score: " + score, new Vector2(50, 100));
 
         }
 

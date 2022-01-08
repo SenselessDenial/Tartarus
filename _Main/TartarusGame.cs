@@ -54,8 +54,8 @@ namespace Tartarus
             Content.RootDirectory = "Content";
             Instance = this;
 
-            ScreenWidth = 800;
-            ScreenHeight = 800;
+            ScreenWidth = 1024;
+            ScreenHeight = 1024;
 
             DeltaTime = 0f;
             RawDeltaTime = 0;

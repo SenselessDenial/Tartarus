@@ -171,7 +171,7 @@ namespace Tartarus
                 case SkillTypes.Damage:
                     return !actor.IsDead;
                 case SkillTypes.Healing:
-                    return (actor.HP < actor.MaxHP) && !actor.IsDead;
+                    return !actor.IsDead;
                 case SkillTypes.Reviving:
                     return actor.IsDead;
                 default:

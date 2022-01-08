@@ -96,14 +96,14 @@ namespace Tartarus
         {
             RoomNode a = new RoomNode();
 
-            Actor beast = ActorPresets.Beast.Actor;
+            EnemyNew beast = new EnemyNew(ActorPresets.Beast);
             EncounterNode b = new EncounterNode(beast);
-            RoomNode c = new RoomNode();
+            RoomNode c = new MoneyNode();
 
             RoomNode d = new RoomNode();
             RoomNode e = new RoomNode();
 
-            EncounterNode f = new EncounterNode(ActorPresets.Beast.Actor, ActorPresets.Beast.Actor);
+            EncounterNode f = new EncounterNode(beast.Copy(), beast.Copy());
 
             a.Add(b);
             a.Add(c);
@@ -114,7 +114,6 @@ namespace Tartarus
 
             d.Add(f);
             e.Add(f);
-
 
             Floor one = new Floor(a);
             Floor two = new Floor(b, c);

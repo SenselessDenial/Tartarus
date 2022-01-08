@@ -64,11 +64,15 @@
     <Compile Include="Components\Background.cs" />
     <Compile Include="Ease.cs" />
     <Compile Include="EncounterNew.cs" />
+    <Compile Include="EncounterNewEntity.cs" />
     <Compile Include="EnemyNew.cs" />
     <Compile Include="EnemyParty.cs" />
+    <Compile Include="EnemyRenderer.cs" />
     <Compile Include="GSong.cs" />
+    <Compile Include="HealthBar.cs" />
     <Compile Include="HeroNew.cs" />
     <Compile Include="HeroParty.cs" />
+    <Compile Include="ItemNew.cs" />
     <Compile Include="Maps\MoneyNode.cs" />
     <Compile Include="ModifierListNew.cs" />
     <Compile Include="PartyNew.cs" />
@@ -87,6 +91,7 @@
     <Compile Include="Actors\Hero.cs" />
     <Compile Include="Maps\Map.cs" />
     <Compile Include="Entities\MapReader.cs" />
+    <Compile Include="Scenes\LoseScene.cs" />
     <Compile Include="Scenes\MapScene.cs" />
     <Compile Include="Maps\EncounterNode.cs" />
     <Compile Include="Maps\RoomNode.cs" />
@@ -98,6 +103,7 @@
     <Compile Include="SkillSetNew.cs" />
     <Compile Include="StatSheetNew.cs" />
     <Compile Include="Scenes\TestScene.cs" />
+    <Compile Include="TargetList.cs" />
     <Compile Include="TimingDiagram.cs" />
     <Compile Include="TitleScreenScene.cs" />
     <Compile Include="Utility\RunData.cs" />
@@ -156,16 +162,19 @@
     <Content Include="bin\Windows\x86\Debug\Resources\fazbeargaming.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\flames.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\fontboxes.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\herobox.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\heroicons.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\Imposter_enemy.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\mouseClick.wav" />
     <Content Include="bin\Windows\x86\Debug\Resources\newfont.xml" />
     <Content Include="bin\Windows\x86\Debug\Resources\newicon.ico" />
     <Content Include="bin\Windows\x86\Debug\Resources\nodes.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\pattern.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\paul_blart.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\polishingtheshaft.wav" />
     <Content Include="bin\Windows\x86\Debug\Resources\rainbow.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\rain_texture.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\selector.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\small_font.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\testimage.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\Triumphant.wav" />
@@ -173,7 +182,6 @@
     <Content Include="bin\Windows\x86\Debug\Resources\viennabg.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\viennabg2.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\wolf.png" />
-    <Content Include="bin\Windows\x86\Debug\Resources\wolf2.png" />
     <Content Include="_Main\TartarusIcon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +194,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="RSC\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

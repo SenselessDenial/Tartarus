@@ -12,7 +12,6 @@ namespace Tartarus
         Entity entity;
         TimingDiagram t;
         Image im;
-        GSong gs;
 
         public TitleScreenScene() : base()
         {

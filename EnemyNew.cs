@@ -11,6 +11,8 @@ namespace Tartarus
         public Affiliations Affiliation { get; private set; }
         public int Money { get; private set; }
 
+        public AINew AI;
+
 
         public EnemyNew(string name,
                      int str, int mag, int end, int res, int spd, int level, int xp, Affiliations affiliation, int money)
@@ -18,12 +20,19 @@ namespace Tartarus
         {
             Affiliation = affiliation;
             Money = money;
+            AI = AINew.RandomSkillAndTarget;
         }
 
         public EnemyNew(EnemyNew parent) : base(parent)
         {
             Affiliation = parent.Affiliation;
             Money = parent.Money;
+            AI = parent.AI;
+        }
+
+        public void SetItems(GTexture portrait)
+        {
+            Portrait = portrait;
         }
 
         public int CalculateXPDrop()
@@ -35,6 +44,10 @@ namespace Tartarus
             return (int)(10 * Level * (1 + a + b + c)) + XP;
         }
 
+        public EnemyNew Copy()
+        {
+            return new EnemyNew(this);
+        }
 
 
     }

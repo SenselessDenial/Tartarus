@@ -10,16 +10,10 @@ namespace Tartarus
     {
         public HeroParty Heroes { get; private set; }
         public EnemyParty Enemies { get; private set; }
-        public ActorNew CurrentActor
-        {
-            get
-            {
-                if (IsHeroesTurn)
-                    return Heroes[CurrentIndex];
-                else
-                    return Enemies[CurrentIndex];
-            }
-        }
+
+        public ActorNew CurrentActor => IsHeroesTurn ? Heroes[CurrentIndex] : (ActorNew)Enemies[CurrentIndex];
+        public HeroNew CurrentHero => IsHeroesTurn ? Heroes[CurrentIndex] : null;
+        public EnemyNew CurrentEnemy => !IsHeroesTurn ? Enemies[CurrentIndex] : null;
 
         public bool IsHeroesTurn { get; private set; }
         private int CurrentIndex;
@@ -37,14 +31,13 @@ namespace Tartarus
             CurrentIndex = heroesGoFirst ? Heroes.IndexOfFirstLivingActor : Enemies.IndexOfFirstLivingActor;
         }
 
-        public void UseSkill(SkillNew skill, int indexOfTarget)
+        private void UseSkill(SkillNew skill, int indexOfTarget)
         {
             if (IsOver)
             {
                 Logger.Log("Encounter is over. Cannot proceed.");
                 return;
             }
-
 
             ActorNew user = CurrentActor;
             ActorNew target;
@@ -96,6 +89,49 @@ namespace Tartarus
                     Logger.Log(user.Name + "'s attack on " + target.Name + " has missed.");
                 }
             }
+        }
+
+        public void UseSkillAndProceed(SkillNew skill, IEnumerable<ActorNew> targets)
+        {
+            if (IsOver)
+            {
+                Logger.Log("Encounter is over. Cannot proceed.");
+                return;
+            }
+
+            ActorNew user = CurrentActor;
+
+            if (user == null || targets == null)
+            {
+                Logger.Log("Current actor or targets is null. Cannot proceed in encounter.");
+                return;
+            }
+
+            if (!user.ContainsSkill(skill))
+            {
+                Logger.Log(user.Name + " does not contain the skill " + skill.Name);
+                return;
+            }
+            else if (!skill.IsUsableBy(user))
+            {
+                Logger.Log(user.Name + " cannot use the skill " + skill.Name);
+                return;
+            }
+
+            user.TakeCosts(skill);
+
+            foreach (var target in targets)
+            {
+                if (!skill.IsUseableOn(target))
+                {
+                    Logger.Log(target.Name + " cannot be affected by the skill " + skill.Name);
+                    return;
+                }
+                else
+                {
+                    UseSkill(skill, target);
+                }
+            }
 
             if (IsOver)
             {
@@ -108,6 +144,74 @@ namespace Tartarus
             }
         }
 
+        public void UseSkillAndProceed(SkillNew skill, params ActorNew[] targets)
+        {
+            UseSkillAndProceed(skill, (IEnumerable<ActorNew>)targets);
+        }
+
+        private void UseSkill(SkillNew skill, ActorNew target)
+        {
+            if (Heroes.Contains(target))
+                UseSkill(skill, (HeroNew)target);
+            else if (Enemies.Contains(target))
+                UseSkill(skill, (EnemyNew)target);
+        }
+        private void UseSkill(SkillNew skill, HeroNew target)
+        {
+            if (IsOver)
+            {
+                Logger.Log("Encounter is over. Cannot proceed.");
+                return;
+            }
+
+            var user = CurrentActor;
+
+            if (skill.CalculateHit(user, target))
+            {
+                Logger.Log(target.Name + " has " + target.HP + " HP & " + target.MP + " MP.");
+                target.TakeDamage(skill.Calculate(user, target));
+                Logger.Log(target.Name + " now has " + target.HP + " HP & " + target.MP + " MP.");
+            }
+            else
+            {
+                Logger.Log(user.Name + "'s attack on " + target.Name + " has missed.");
+            }
+        }
+        private void UseSkill(SkillNew skill, EnemyNew target)
+        {
+            if (IsOver)
+            {
+                Logger.Log("Encounter is over. Cannot proceed.");
+                return;
+            }
+
+            var user = CurrentActor;
+
+            if (skill.CalculateHit(user, target))
+            {
+                Logger.Log(target.Name + " has " + target.HP + " HP & " + target.MP + " MP.");
+                target.TakeDamage(skill.Calculate(user, target));
+                Logger.Log(target.Name + " now has " + target.HP + " HP & " + target.MP + " MP.");
+            }
+            else
+            {
+                Logger.Log(user.Name + "'s attack on " + target.Name + " has missed.");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
         private void CycleCurrentActor()
         {
             if (IsHeroesTurn)

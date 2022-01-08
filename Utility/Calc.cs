@@ -164,5 +164,12 @@ namespace Tartarus
             return sfx;
         }
 
+        public static T ChooseRandom<T>(List<T> list)
+        {
+            int index = Calc.Next(0, list.Count);
+            return list[index];
+
+        }
+
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tartarus.Maps
+namespace Tartarus
 {
     class MoneyNode : RoomNode
     {
@@ -24,7 +24,7 @@ namespace Tartarus.Maps
 
         public override void Invoke()
         {
-            
+            RunData.PlayerParty.ReceiveMoney(money);
         }
 
 

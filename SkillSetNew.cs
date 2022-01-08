@@ -12,6 +12,14 @@ namespace Tartarus
 
         private readonly List<SkillNew> skills;
 
+        public List<SkillNew> NonBasicSkills => (from item in skills
+                                              where !SkillNew.IsBasic(item)
+                                              select item).ToList();
+
+        public List<SkillNew> UsableSkills => (from item in skills
+                                               where item.IsUsableBy(Actor)
+                                               select item).ToList();
+
         public SkillSetNew(ActorNew actor)
         {
             skills = new List<SkillNew>();

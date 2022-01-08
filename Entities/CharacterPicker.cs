@@ -10,7 +10,7 @@ namespace Tartarus
 {
     public class CharacterPicker : Entity
     {
-        private List<Hero> presets;
+        private List<HeroNew> presets;
 
         private int Count => presets.Count;
 
@@ -18,11 +18,11 @@ namespace Tartarus
         private int SelectedIndex = -1;
         public bool IsDone = false;
 
-        public Hero CurrentHero => presets[CurrentIndex];
+        public HeroNew CurrentHero => presets[CurrentIndex];
 
         public CharacterPicker(Scene scene) : base(scene)
         {
-            presets = new List<Hero>();
+            presets = new List<HeroNew>();
         }
 
         public void Swap(int index1, int index2)
@@ -32,12 +32,12 @@ namespace Tartarus
                 Logger.Log("index is out of bounds. Cannot swap.");
                 return;
             }
-            Hero temp = presets[index1];
+            HeroNew temp = presets[index1];
             presets[index1] = presets[index2];
             presets[index2] = temp;
         }
 
-        public void Add(Hero preset)
+        public void Add(HeroNew preset)
         {
             if (!presets.Contains(preset))
                 presets.Add(preset);
@@ -86,12 +86,12 @@ namespace Tartarus
 
         public void CreateParty()
         {
-            Hero a = presets[0].Copy();
-            Hero b = presets[1].Copy();
-            Hero c = presets[2].Copy();
-            Hero d = presets[3].Copy();
+            HeroNew a = new HeroNew(presets[0]);
+            HeroNew b = new HeroNew(presets[1]);
+            HeroNew c = new HeroNew(presets[2]);
+            HeroNew d = new HeroNew(presets[3]);
 
-            RunData.PlayerParty = new Party(a, b, c, d);
+            RunData.PlayerParty = new HeroParty(a, b, c, d);
             Logger.Log("Party Created!");
             IsDone = true;
         }
@@ -142,7 +142,7 @@ namespace Tartarus
             presets[CurrentIndex].Portrait?.Draw(new Vector2(120, 55));
         }
 
-        private Comparison<Hero> sortUnlocked = (x, y) =>
+        private Comparison<HeroNew> sortUnlocked = (x, y) =>
         {
             if (x.IsUnlocked && !y.IsUnlocked)
                 return -1;
