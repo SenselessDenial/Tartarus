@@ -62,18 +62,7 @@ namespace Tartarus
         }
         private DrawAlignment alignment;
 
-        public enum DrawAlignment
-        {
-            TopLeft,
-            TopCenter,
-            TopRight,
-            CenterLeft,
-            Center,
-            CenterRight,
-            BottomLeft,
-            BottomCenter,
-            BottomRight
-        }
+        
 
         public Image(Entity entity, GTexture texture, DrawAlignment alignment = DrawAlignment.TopLeft)
             : base(entity, false)
@@ -97,5 +86,18 @@ namespace Tartarus
         {
             Texture.Dispose();
         }
+    }
+
+    public enum DrawAlignment
+    {
+        TopLeft,
+        TopCenter,
+        TopRight,
+        CenterLeft,
+        Center,
+        CenterRight,
+        BottomLeft,
+        BottomCenter,
+        BottomRight
     }
 }

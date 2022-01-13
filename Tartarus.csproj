@@ -72,6 +72,7 @@
     <Compile Include="HealthBar.cs" />
     <Compile Include="HeroNew.cs" />
     <Compile Include="HeroParty.cs" />
+    <Compile Include="HeroRenderer.cs" />
     <Compile Include="ItemNew.cs" />
     <Compile Include="Maps\MoneyNode.cs" />
     <Compile Include="ModifierListNew.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="Scenes\TestScene.cs" />
     <Compile Include="TargetList.cs" />
     <Compile Include="TimingDiagram.cs" />
-    <Compile Include="TitleScreenScene.cs" />
+    <Compile Include="Scenes\TitleScreenScene.cs" />
     <Compile Include="Utility\RunData.cs" />
     <Compile Include="Scenes\MainMenu.cs" />
     <Compile Include="XtraUnsorted\Puppeteer.cs" />
@@ -164,6 +165,7 @@
     <Content Include="bin\Windows\x86\Debug\Resources\fontboxes.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\herobox.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\heroicons.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\hero_card.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\Imposter_enemy.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\mouseClick.wav" />
     <Content Include="bin\Windows\x86\Debug\Resources\newfont.xml" />
@@ -179,6 +181,7 @@
     <Content Include="bin\Windows\x86\Debug\Resources\testimage.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\Triumphant.wav" />
     <Content Include="bin\Windows\x86\Debug\Resources\truffle.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\turn_icon.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\viennabg.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\viennabg2.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\wolf.png" />

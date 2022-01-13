@@ -54,9 +54,7 @@ namespace Tartarus
         public override void Render()
         {
             base.Render();
-
-            box.Draw(new Vector2(0, 0));
-
+            
         }
 
 

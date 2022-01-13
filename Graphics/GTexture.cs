@@ -98,6 +98,44 @@ namespace Tartarus
             Draw(pos, color, 0f, new Vector2(0, 0), scale);
         }
 
+        public void Draw(Vector2 pos, DrawAlignment alignment)
+        {
+            Vector2 offset = Vector2.Zero;
+            switch (alignment)
+            {
+                case DrawAlignment.TopLeft:
+                    offset = new Vector2(0, 0);
+                    break;
+                case DrawAlignment.TopCenter:
+                    offset = new Vector2(ClipRect.Width / 2, 0f);
+                    break;
+                case DrawAlignment.TopRight:
+                    offset = new Vector2(ClipRect.Width, 0f);
+                    break;
+                case DrawAlignment.CenterLeft:
+                    offset = new Vector2(0, ClipRect.Height / 2);
+                    break;
+                case DrawAlignment.Center:
+                    offset = new Vector2(ClipRect.Width / 2, ClipRect.Height / 2);
+                    break;
+                case DrawAlignment.CenterRight:
+                    offset = new Vector2(ClipRect.Width, ClipRect.Height / 2);
+                    break;
+                case DrawAlignment.BottomLeft:
+                    offset = new Vector2(0, ClipRect.Height);
+                    break;
+                case DrawAlignment.BottomCenter:
+                    offset = new Vector2(ClipRect.Width / 2, ClipRect.Height);
+                    break;
+                case DrawAlignment.BottomRight:
+                    offset = new Vector2(ClipRect.Width, ClipRect.Height);
+                    break;
+                default:
+                    break;
+            }
+            Draw(pos, offset, Color.White);
+        }
+
         public void Draw(Vector2 pos)
         {
             Draw(pos, Color.White, 0f, new Vector2(0, 0), new Vector2(1, 1));

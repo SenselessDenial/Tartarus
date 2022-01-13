@@ -11,6 +11,7 @@ namespace Tartarus
     {
         public EncounterNew Encounter { get; private set; }
         private EnemyRenderer enemyRenderer;
+        private HeroRenderer heroRenderer;
         private TargetList targetList;
         private SelectionMatrix options;
 
@@ -95,8 +96,15 @@ namespace Tartarus
         private void RefreshTargets(SkillNew skill)
         {
             targetList.RefreshTargets(skill);
+            UpdateTargets();
+        }
+
+        private void UpdateTargets()
+        {
             enemyRenderer.SelectedTarget = targetList.SelectedTarget;
             enemyRenderer.AvailableTargets = targetList.AvailableTargets;
+            heroRenderer.SelectedTarget = targetList.SelectedTarget;
+            heroRenderer.AvailableTargets = targetList.AvailableTargets;
         }
 
 
@@ -107,6 +115,7 @@ namespace Tartarus
             targetList = new TargetList(this, encounter);
             enemyRenderer = new EnemyRenderer(this, encounter);
             enemyRenderer.Offset = new Vector2(Scene.Camera.Width / 2, 50);
+            heroRenderer = new HeroRenderer(this, encounter);
             options = new SelectionMatrix(this, 3, 2, 50, 15);
             options.Offset = new Vector2(Scene.Camera.Width / 2, Scene.Camera.Height - 40);
             options.FocusPoint = new Point(1, 0);
@@ -185,14 +194,12 @@ namespace Tartarus
                     if (Input.Pressed(MappedKeys.Right))
                     {
                         targetList.MoveNext();
-                        enemyRenderer.SelectedTarget = targetList.SelectedTarget;
-                        enemyRenderer.AvailableTargets = targetList.AvailableTargets;
+                        UpdateTargets();
                     }
                     if (Input.Pressed(MappedKeys.Left))
                     {
                         targetList.MovePrevious();
-                        enemyRenderer.SelectedTarget = targetList.SelectedTarget;
-                        enemyRenderer.AvailableTargets = targetList.AvailableTargets;
+                        UpdateTargets();
                     }
                     if (Input.Pressed(MappedKeys.A))
                     {

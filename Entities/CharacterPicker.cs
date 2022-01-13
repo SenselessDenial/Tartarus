@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;  
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using static Tartarus.ActorPresets;
 
 namespace Tartarus
@@ -11,8 +12,10 @@ namespace Tartarus
     public class CharacterPicker : Entity
     {
         private List<HeroNew> presets;
+        private SoundEffect movingSFX;
 
         private int Count => presets.Count;
+        
 
         private int CurrentIndex = 0;
         private int SelectedIndex = -1;
@@ -20,10 +23,16 @@ namespace Tartarus
 
         public HeroNew CurrentHero => presets[CurrentIndex];
 
-        public CharacterPicker(Scene scene) : base(scene)
+        public CharacterPicker(Scene scene, SoundEffect movingSFX) 
+            : base(scene)
         {
             presets = new List<HeroNew>();
+            this.movingSFX = movingSFX;
         }
+
+        public CharacterPicker(Scene scene)
+            : this(scene, null) { }
+        
 
         public void Swap(int index1, int index2)
         {
@@ -52,7 +61,11 @@ namespace Tartarus
                 if (CurrentIndex >= Count)
                     CurrentIndex = 0;
                 if (presets[CurrentIndex].IsUnlocked == true)
+                {
+                    movingSFX?.Play();
                     return;
+                }
+                    
             }
             Logger.Log("There are no unlocked presets!");
         }
@@ -65,7 +78,11 @@ namespace Tartarus
                 if (CurrentIndex < 0)
                     CurrentIndex = Count - 1;
                 if (presets[CurrentIndex].IsUnlocked == true)
+                {
+                    movingSFX?.Play();
                     return;
+                }
+                    
             }
             Logger.Log("There are no unlocked presets!");
         }
@@ -139,10 +156,10 @@ namespace Tartarus
                 drawPos.Y += 12;
             }
 
-            presets[CurrentIndex].Portrait?.Draw(new Vector2(120, 55));
+            presets[CurrentIndex].Portrait?.Draw(new Vector2(Scene.Camera.Width - 50, Scene.Camera.Height / 2), DrawAlignment.Center);
         }
 
-        private Comparison<HeroNew> sortUnlocked = (x, y) =>
+        private readonly Comparison<HeroNew> sortUnlocked = (x, y) =>
         {
             if (x.IsUnlocked && !y.IsUnlocked)
                 return -1;

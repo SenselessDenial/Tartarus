@@ -22,6 +22,7 @@ namespace Tartarus
 
         //private static float cutoff = 0.005f;
 
+        private TimingRequest LastRequest => requests.Count > 0 ? requests[requests.Count - 1] : new TimingRequest(0, 0, 0, Maintain);
 
         public TimingDiagram(Entity entity) : base(entity, true, false)
         {
@@ -60,9 +61,14 @@ namespace Tartarus
             currentRequest = FindCurrentRequest();
         }
 
+        public void Add(float endValue, float duration, Easing function)
+        {
+            Add(LastRequest.EndValue, endValue, duration, function);
+        }
+
         public void AddMaintain(float duration)
         {
-            requests.Add(new TimingRequest(0, 0, duration, Maintain));
+            requests.Add(new TimingRequest(LastRequest.EndValue, LastRequest.EndValue, duration, Maintain));
             currentRequest = FindCurrentRequest();
         }
 

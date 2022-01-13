@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Tartarus
 {
@@ -14,7 +15,7 @@ namespace Tartarus
         private Background background;
         private Text pressStart;
         private SineWaver waver;
-        
+        private SoundEffect abc;
 
 
         public CharacterSelectScene() : base()
@@ -30,15 +31,14 @@ namespace Tartarus
 
             ActorPresets.Begin();
             RunData.Reset();
+            abc = Calc.SFXFromFile("mouseClick.wav");
 
-
-            picker = new CharacterPicker(this);
-            picker.Position = new Vector2(20, 20);
+            picker = new CharacterPicker(this, abc);
+            picker.Position = new Vector2(20, 100);
             picker.Add(ActorPresets.Anna);
             picker.Add(ActorPresets.Sophie);
             picker.Add(ActorPresets.Eva);
             picker.Add(ActorPresets.Madeline);
-            //picker.Add(ActorPresets.Gabriel);
 
             helper = new Entity(this);
             background = new Background(helper, new GTexture("viennabg2.png"));

@@ -33,6 +33,26 @@ namespace Tartarus
             }
         }
 
+        public void Draw(string message, Vector2 pos, Color color)
+        {
+            Vector2 offset = Vector2.Zero;
+            for (int i = 0; i < message.Length; i++)
+            {
+                char current = message[i];
+                if (current == '\n')
+                {
+                    offset.Y += Height;
+                    offset.X = 0;
+                }
+                else
+                {
+                    Draw(current, pos + offset, color);
+                    offset.X += Width;
+                }
+
+            }
+        }
+
         public void Draw(string message, Vector2 pos)
         {
             Vector2 offset = Vector2.Zero;
@@ -58,6 +78,18 @@ namespace Tartarus
             if (characters.ContainsKey(char.ToUpper(character)))
             {
                 characters[char.ToUpper(character)].Draw(pos);
+            }
+            else
+            {
+                Logger.Log("Char not found.");
+            }
+        }
+
+        public void Draw(char character, Vector2 pos, Color color)
+        {
+            if (characters.ContainsKey(char.ToUpper(character)))
+            {
+                characters[char.ToUpper(character)].Draw(pos, color);
             }
             else
             {

@@ -26,16 +26,17 @@ namespace Tartarus
 
             entity = new Entity(this);
             entity.Position = new Vector2(Camera.Width / 2, Camera.Height / 2);
-            im = new Image(entity, new GTexture("fazbeargaming.png"), Image.DrawAlignment.Center);
+            im = new Image(entity, new GTexture("fazbeargaming.png"), DrawAlignment.Center);
             t = new TimingDiagram(entity);
-            t.Add(0, 255, 3, Ease.SineOut);
             t.AddMaintain(1);
-            t.Add(255, 0, 3, Ease.SineIn);
+            t.Add(255, 3, Ease.SineOut);
+            t.AddMaintain(1);
+            t.Add(0, 3, Ease.SineIn);
             t.AddMaintain(1);
             t.AddAction(() => { im.Texture = new GTexture("fartholomew_mini.png"); });
-            t.Add(0, 255, 3, Ease.SineOut);
+            t.Add(255, 3, Ease.SineOut);
             t.AddMaintain(1);
-            t.Add(255, 0, 3, Ease.SineIn);
+            t.Add(0, 3, Ease.SineIn);
             t.AddMaintain(1);
             t.AddAction(() => { SetNextScene(SceneManager.MainMenu); });
             t.Start();

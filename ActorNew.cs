@@ -50,6 +50,8 @@ namespace Tartarus
         public bool CanLevelUp => Stats.CanLevelUp;
         public bool IsDead => HP <= 0;
         public float HPPercent => (float)HP / MaxHP;
+        public float MPPercent => (float)MP / MaxMP;
+        public float XPPercent => (float)XP / XPToNext;
         public string Card => Name + "\nHP: " + HP + "/" + MaxHP + "\nMP: " + MP + "/" + MaxMP;
 
         public ActorNew(ActorNew parent)
