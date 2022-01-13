@@ -63,6 +63,7 @@ namespace Tartarus
         HP,
         MP,
         Strength,
+        Dexterity,
         Magic,
         Endurance,
         Resilience,

@@ -50,6 +50,11 @@ namespace Tartarus
             time = 0f;
         }
 
+        public void Reset()
+        {
+            time = 0f;
+        }
+
         public bool Check(float time)
         {
             return this.time >= time;
@@ -96,7 +101,6 @@ namespace Tartarus
 
             if (time > backdrop + currentRequest.Duration)
             {
-                backdrop += currentRequest.Duration;
                 currentRequest = FindCurrentRequest();
             }
 
@@ -126,6 +130,7 @@ namespace Tartarus
             {
                 if (time < item.Duration + tempBackdrop)
                 {
+                    backdrop = tempBackdrop;
                     return item;
                 }
                 tempBackdrop += item.Duration;

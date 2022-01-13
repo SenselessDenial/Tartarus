@@ -15,8 +15,8 @@ namespace Tartarus
 
 
         public EnemyNew(string name,
-                     int str, int mag, int end, int res, int spd, int level, int xp, Affiliations affiliation, int money)
-            : base(name, str, mag, end, res, spd, level, xp)
+                     int str,  int dex, int mag, int end, int res, int spd, int level, int xp, Affiliations affiliation, int money)
+            : base(name, str, dex, mag, end, res, spd, level, xp)
         {
             Affiliation = affiliation;
             Money = money;

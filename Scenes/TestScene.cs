@@ -9,14 +9,6 @@ namespace Tartarus
 {
     public class TestScene : Scene
     {
-        private HeroNew a;
-        private EnemyNew b;
-
-        private EncounterNew e;
-
-
-
-
 
         public TestScene() : base()
         {
@@ -28,11 +20,6 @@ namespace Tartarus
             base.Begin();
             FillColor = Color.Lime;
             Camera.Scale = new Vector2(4);
-
-            a = new HeroNew("bob", 2, 2, 2, 2, 2, 1, 1, 1, 1, 1);
-            b = new EnemyNew("arg", 1, 1, 1, 1, 1, 1, 0, Affiliations.None, 20);
-
-            e = new EncounterNew(new HeroParty(a), new EnemyParty(b), true);
 
         }
 

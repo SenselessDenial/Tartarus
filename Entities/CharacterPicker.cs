@@ -13,13 +13,30 @@ namespace Tartarus
     {
         private List<HeroNew> presets;
         private SoundEffect movingSFX;
+        private TimingDiagram bookmarkTimer;
 
         private int Count => presets.Count;
         
 
-        private int CurrentIndex = 0;
+        private int CurrentIndex
+        {
+            get
+            {
+                if (!IsBookmarkOnScreen)
+                    currentIndex = newIndex;
+                return currentIndex;
+            }
+            set => newIndex = value;
+        }
+
+        private int currentIndex = 0;
+        private int newIndex = 0;
+
+
         private int SelectedIndex = -1;
         public bool IsDone = false;
+
+        private bool IsBookmarkOnScreen => bookmarkTimer.Value < Scene.Camera.Width;
 
         public HeroNew CurrentHero => presets[CurrentIndex];
 
@@ -28,6 +45,9 @@ namespace Tartarus
         {
             presets = new List<HeroNew>();
             this.movingSFX = movingSFX;
+            bookmarkTimer = new TimingDiagram(this);
+            bookmarkTimer.Add(Scene.Camera.Width + 5, Scene.Camera.Width - 71, 0.6f, Ease.SineOut);
+            bookmarkTimer.Start();
         }
 
         public CharacterPicker(Scene scene)
@@ -62,6 +82,7 @@ namespace Tartarus
                     CurrentIndex = 0;
                 if (presets[CurrentIndex].IsUnlocked == true)
                 {
+                    bookmarkTimer.Reset();
                     movingSFX?.Play();
                     return;
                 }
@@ -79,6 +100,7 @@ namespace Tartarus
                     CurrentIndex = Count - 1;
                 if (presets[CurrentIndex].IsUnlocked == true)
                 {
+                    bookmarkTimer.Reset();
                     movingSFX?.Play();
                     return;
                 }
@@ -156,7 +178,7 @@ namespace Tartarus
                 drawPos.Y += 12;
             }
 
-            presets[CurrentIndex].Portrait?.Draw(new Vector2(Scene.Camera.Width - 50, Scene.Camera.Height / 2), DrawAlignment.Center);
+            presets[CurrentIndex]?.DrawBookmark(new Vector2(bookmarkTimer.Value, 20));
         }
 
         private readonly Comparison<HeroNew> sortUnlocked = (x, y) =>

@@ -65,7 +65,6 @@ namespace Tartarus
         {
             base.Render();
 
-
         }
 
 

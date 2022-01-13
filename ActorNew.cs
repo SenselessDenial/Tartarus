@@ -35,6 +35,7 @@ namespace Tartarus
             set => Stats.MP.MaxValue = value;
         }
         public int Strength => Stats.Strength.Value;
+        public int Dexterity => Stats.Dexterity.Value;
         public int Magic => Stats.Magic.Value;
         public int Endurance => Stats.Endurance.Value;
         public int Resilience => Stats.Resilience.Value;
@@ -64,27 +65,27 @@ namespace Tartarus
         }
 
         protected ActorNew(string name,
-                     int str, int mag, int end, int res, int spd, int level, int xp)
+                     int str, int dex, int mag, int end, int res, int spd, int level, int xp)
         {
             Name = name;
-            Stats = new StatSheetNew(this, str, mag, end, res, spd, level, xp);
+            Stats = new StatSheetNew(this, str, dex, mag, end, res, spd, level, xp);
             Skills = new SkillSetNew(this);
             Modifiers = new ModifierListNew(this);
         }
 
         public ActorNew(string name,
-                     int str, int mag, int end, int res, int spd,
-                     int strWeight, int magWeight, int endWeight, int resWeight, int spdWeight)
+                     int str, int dex, int mag, int end, int res, int spd,
+                     int strWeight, int dexWeight, int magWeight, int endWeight, int resWeight, int spdWeight)
         {
             Name = name;
-            Stats = new StatSheetNew(this, str, mag, end, res, spd, strWeight, magWeight, endWeight, resWeight, spdWeight);
+            Stats = new StatSheetNew(this, str, dex, mag, end, res, spd, strWeight, dexWeight, magWeight, endWeight, resWeight, spdWeight);
             Skills = new SkillSetNew(this);
             Modifiers = new ModifierListNew(this);
         }
 
         protected ActorNew(string name,
-                     int str, int mag, int end, int res, int spd)
-            : this(name, str, mag, end, res, spd, 20, 20, 20, 20, 20) { }
+                     int str, int dex, int mag, int end, int res, int spd)
+            : this(name, str, dex, mag, end, res, spd, 1, 1, 1, 1, 1, 1) { }
 
         private void LevelUp()
         {
@@ -131,6 +132,12 @@ namespace Tartarus
         public void AddSkill(SkillNew skill)
         {
             Skills.Add(skill);
+        }
+
+        public void AddSkill(params SkillNew[] skills)
+        {
+            foreach (var skill in skills)
+                AddSkill(skill);
         }
 
         public void AddInnateResistance(Elements element, Resistances resistance)

@@ -44,14 +44,12 @@ namespace Tartarus
                         AvailableTargets.AddRange(from item in encounter.Heroes
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = AvailableTargets[0];
                     }
                     else
                     {
                         AvailableTargets.AddRange(from item in encounter.Enemies
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = AvailableTargets[0];
                     }
                     break;
                 case Targets.AllyExcludingSelf:
@@ -60,14 +58,12 @@ namespace Tartarus
                         AvailableTargets.AddRange(from item in encounter.Heroes
                                                   where item != CurrentActor && skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = AvailableTargets[0];
                     }
                     else
                     {
                         AvailableTargets.AddRange(from item in encounter.Enemies
                                                   where item != CurrentActor && skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = AvailableTargets[0];
                     }
                     break;
                 case Targets.AllyParty:
@@ -76,14 +72,12 @@ namespace Tartarus
                         AvailableTargets.AddRange(from item in encounter.Heroes
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = null;
                     }
                     else
                     {
                         AvailableTargets.AddRange(from item in encounter.Enemies
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = null;
                     }
                     break;
                 case Targets.Enemy:
@@ -92,14 +86,12 @@ namespace Tartarus
                         AvailableTargets.AddRange(from item in encounter.Enemies
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = AvailableTargets[0];
                     }
                     else
                     {
                         AvailableTargets.AddRange(from item in encounter.Heroes
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = AvailableTargets[0];
                     }
                     break;
                 case Targets.EnemyParty:
@@ -108,14 +100,12 @@ namespace Tartarus
                         AvailableTargets.AddRange(from item in encounter.Enemies
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = null;
                     }
                     else
                     {
                         AvailableTargets.AddRange(from item in encounter.Heroes
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = null;
                     }
                     break;
                 case Targets.RandomEnemy:
@@ -124,14 +114,12 @@ namespace Tartarus
                         AvailableTargets.AddRange(from item in encounter.Enemies
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = null;
                     }
                     else
                     {
                         AvailableTargets.AddRange(from item in encounter.Heroes
                                                   where skill.IsUseableOn(item)
                                                   select item);
-                        SelectedTarget = null;
                     }
                     break;
                 case Targets.All:
@@ -141,12 +129,42 @@ namespace Tartarus
                     AvailableTargets.AddRange(from item in encounter.Heroes
                                               where skill.IsUseableOn(item)
                                               select item);
-                    SelectedTarget = null;
                     break;
                 default:
                     Logger.Log("Targeting case not accounted for!");
                     break;
             }
+
+            switch (skill.Target)
+            {
+                case Targets.Self:
+                case Targets.Ally:
+                case Targets.AllyExcludingSelf:
+                case Targets.Enemy:
+                    if (AvailableTargets.Count > 0)
+                        SelectedTarget = AvailableTargets[0];
+                    else
+                    {
+                        Logger.Log("There are no available targets. Setting selected target to null.");
+                        SelectedTarget = null;
+                    }
+                    break;
+                case Targets.AllyParty:
+                case Targets.EnemyParty:
+                case Targets.RandomEnemy:
+                case Targets.All:
+                    if (AvailableTargets.Count > 0)
+                        SelectedTarget = null;
+                    else
+                    {
+                        Logger.Log("There are no available targets. Setting selected target to null.");
+                        SelectedTarget = null;
+                    }
+                    break;
+                default:
+                    throw new Exception("Targeting case not accounted for. Cannot set selected targets");
+            }
+
         }
 
         public void MoveNext()

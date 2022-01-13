@@ -165,6 +165,7 @@
     <Content Include="bin\Windows\x86\Debug\Resources\fontboxes.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\herobox.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\heroicons.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\hero_bookmark.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\hero_card.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\Imposter_enemy.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\mouseClick.wav" />

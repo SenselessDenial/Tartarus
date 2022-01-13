@@ -194,6 +194,7 @@ namespace Tartarus
                 case OptionStates.Skills:
                     State = OptionStates.Options;
                     options.CurrentPoint = new Point(2, 0);
+                    prevSelection = Point.Zero;
                     break;
                 case OptionStates.Targets:
                     if (prevState == OptionStates.Skills)
@@ -201,11 +202,13 @@ namespace Tartarus
                         Logger.Log(prevSelection);
                         State = OptionStates.Skills;
                         options.CurrentPoint = prevSelection;
+                        prevSelection = Point.Zero;
                     }
                     if (prevState == OptionStates.Options)
                     {
                         State = OptionStates.Options;
                         options.CurrentPoint = prevSelection;
+                        prevSelection = Point.Zero;
                     }
                     break;
                 case OptionStates.None:
