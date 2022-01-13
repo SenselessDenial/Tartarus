@@ -20,13 +20,24 @@ namespace Tartarus
 
         public Point FocusPoint = new Point(0, 0);
 
-        private Point CurrentPoint
+        public Point CurrentPoint
         {
             get => currentPoint;
             set
             {
                 if (CurrentButton != null)
                     CurrentButton.IsSelected = false;
+
+                if (value.X < 0)
+                    value.X = 0;
+                else if (value.X >= Width)
+                    value.X = Width - 1;
+
+                if (value.Y < 0)
+                    value.Y = 0;
+                else if (value.Y >= Height)
+                    value.Y = Height - 1;
+
                 currentPoint = value;
                 CurrentButton.IsSelected = true;
             }
@@ -111,13 +122,23 @@ namespace Tartarus
                 temp.Y++;
                 if (temp.Y >= Height)
                     temp.Y = 0;
-                if (matrix[temp.X, temp.Y] != null)
+
+                for (int j = 0; j < Width; j++)
                 {
-                    if (!matrix[temp.X, temp.Y].IsSelectable)
-                        continue;
-                    CurrentPoint = temp;
-                    return;
+                    if (matrix[temp.X, temp.Y] != null)
+                    {
+                        if (matrix[temp.X, temp.Y].IsSelectable)
+                        {
+                            CurrentPoint = temp;
+                            return;
+                        }
+                    }
+
+                    temp.X++;
+                    if (temp.X >= Width)
+                        temp.X = 0;
                 }
+
             }
 
         }
@@ -136,13 +157,23 @@ namespace Tartarus
                 temp.Y--;
                 if (temp.Y < 0)
                     temp.Y = Height - 1;
-                if (matrix[temp.X, temp.Y] != null)
+
+                for (int j = 0; j < Width; j++)
                 {
-                    if (!matrix[temp.X, temp.Y].IsSelectable)
-                        continue;
-                    CurrentPoint = temp;
-                    return;
+                    if (matrix[temp.X, temp.Y] != null)
+                    {
+                        if (matrix[temp.X, temp.Y].IsSelectable)
+                        {
+                            CurrentPoint = temp;
+                            return;
+                        }
+                    }
+
+                    temp.X++;
+                    if (temp.X >= Width)
+                        temp.X = 0;
                 }
+
             }
         }
 
@@ -160,13 +191,25 @@ namespace Tartarus
                 temp.X++;
                 if (temp.X >= Width)
                     temp.X = 0;
-                if (matrix[temp.X, temp.Y] != null)
+
+                for (int j = 0; j < Height; j++)
                 {
-                    if (!matrix[temp.X, temp.Y].IsSelectable)
-                        continue;
-                    CurrentPoint = temp;
-                    return;
+                    if (matrix[temp.X, temp.Y] != null)
+                    {
+                        if (matrix[temp.X, temp.Y].IsSelectable)
+                        {
+                            CurrentPoint = temp;
+                            return;
+                        }
+                    }
+
+                    temp.Y++;
+                    if (temp.Y >= Height)
+                        temp.Y = 0;
                 }
+
+
+               
             }
         }
 
@@ -184,12 +227,21 @@ namespace Tartarus
                 temp.X--;
                 if (temp.X < 0)
                     temp.X = Width - 1;
-                if (matrix[temp.X, temp.Y] != null)
+
+                for (int j = 0; j < Height; j++)
                 {
-                    if (!matrix[temp.X, temp.Y].IsSelectable)
-                        continue;
-                    CurrentPoint = temp;
-                    return;
+                    if (matrix[temp.X, temp.Y] != null)
+                    {
+                        if (matrix[temp.X, temp.Y].IsSelectable)
+                        {
+                            CurrentPoint = temp;
+                            return;
+                        }
+                    }
+
+                    temp.Y++;
+                    if (temp.Y >= Height)
+                        temp.Y = 0;
                 }
             }
         }
