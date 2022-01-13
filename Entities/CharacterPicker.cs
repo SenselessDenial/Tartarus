@@ -22,15 +22,17 @@ namespace Tartarus
         {
             get
             {
-                if (!IsBookmarkOnScreen)
-                    currentIndex = newIndex;
                 return currentIndex;
             }
-            set => newIndex = value;
+            set
+            {
+                renderIndex = currentIndex;
+                currentIndex = value;
+            }
         }
 
         private int currentIndex = 0;
-        private int newIndex = 0;
+        private int renderIndex = 0;
 
 
         private int SelectedIndex = -1;
@@ -77,9 +79,12 @@ namespace Tartarus
         {
             for (int i = 0; i < Count; i++)
             {
-                CurrentIndex += 1;
-                if (CurrentIndex >= Count)
+
+                if (CurrentIndex + 1 >= Count)
                     CurrentIndex = 0;
+                else
+                    CurrentIndex += 1;
+
                 if (presets[CurrentIndex].IsUnlocked == true)
                 {
                     bookmarkTimer.Reset();
@@ -95,9 +100,12 @@ namespace Tartarus
         {
             for (int i = 0; i < Count; i++)
             {
-                CurrentIndex -= 1;
-                if (CurrentIndex < 0)
+
+                if (CurrentIndex - 1 < 0)
                     CurrentIndex = Count - 1;
+                else
+                    CurrentIndex -= 1;
+
                 if (presets[CurrentIndex].IsUnlocked == true)
                 {
                     bookmarkTimer.Reset();
@@ -137,6 +145,9 @@ namespace Tartarus
 
         public override void Update()
         {
+            if (IsBookmarkOnScreen)
+                renderIndex = currentIndex;
+
             base.Update();
 
             if (IsDone)
@@ -178,7 +189,7 @@ namespace Tartarus
                 drawPos.Y += 12;
             }
 
-            presets[CurrentIndex]?.DrawBookmark(new Vector2(bookmarkTimer.Value, 20));
+            presets[renderIndex]?.DrawBookmark(new Vector2(bookmarkTimer.Value, 20));
         }
 
         private readonly Comparison<HeroNew> sortUnlocked = (x, y) =>
