@@ -18,7 +18,7 @@ namespace Tartarus
             Party = party;
         }
 
-        public EncounterNode(params EnemyNew[] actors) 
+        public EncounterNode(params Enemy[] actors) 
             : this(new EnemyParty(actors)) { }
 
         public override void Invoke()

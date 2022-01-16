@@ -8,6 +8,8 @@ namespace Tartarus
 {
     public class Item
     {
+      
+
         public string Name { get; private set; }
         public Skill Skill { get; private set; }
         public int Cost { get; private set; }
@@ -22,6 +24,7 @@ namespace Tartarus
         }
 
         public static Item TeslaGrenade = new Item("Tesla Grenade", Skill.ElecBomb, 50, 10);
+
 
 
     }

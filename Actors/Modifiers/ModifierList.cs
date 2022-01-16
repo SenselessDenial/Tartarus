@@ -17,8 +17,8 @@ namespace Tartarus
                                        select item).Count();
 
         public int NumOfResistances => (from item in innateResistances
-                                       where item.Value == Resistances.Strong
-                                       select item).Count();
+                                        where item.Value == Resistances.Strong
+                                        select item).Count();
 
         public ModifierList(Actor actor)
         {
@@ -69,14 +69,4 @@ namespace Tartarus
 
 
     }
-
-    public enum OffensiveBonuses
-    {
-        Great = 2,
-        Good = 1,
-        None = 0,
-        Bad = -1,
-        Awful = -2
-    }
-
 }

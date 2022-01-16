@@ -11,7 +11,7 @@ namespace Tartarus
 {
     public class CharacterPicker : Entity
     {
-        private List<HeroNew> presets;
+        private List<Hero> presets;
         private SoundEffect movingSFX;
         private SoundEffect swapSFX;
         private TimingDiagram bookmarkTimer;
@@ -41,12 +41,12 @@ namespace Tartarus
 
         private bool IsBookmarkOnScreen => bookmarkTimer.Value < Scene.Camera.Width;
 
-        public HeroNew CurrentHero => presets[CurrentIndex];
+        public Hero CurrentHero => presets[CurrentIndex];
 
         public CharacterPicker(Scene scene, SoundEffect movingSFX, SoundEffect swapSFX) 
             : base(scene)
         {
-            presets = new List<HeroNew>();
+            presets = new List<Hero>();
             this.movingSFX = movingSFX;
             this.swapSFX = swapSFX;
             bookmarkTimer = new TimingDiagram(this, Scene.Camera.Width + 5);
@@ -65,13 +65,13 @@ namespace Tartarus
                 Logger.Log("index is out of bounds. Cannot swap.");
                 return;
             }
-            HeroNew temp = presets[index1];
+            Hero temp = presets[index1];
             presets[index1] = presets[index2];
             presets[index2] = temp;
             swapSFX.Play();
         }
 
-        public void Add(HeroNew preset)
+        public void Add(Hero preset)
         {
             if (!presets.Contains(preset))
                 presets.Add(preset);
@@ -136,10 +136,10 @@ namespace Tartarus
 
         public void CreateParty()
         {
-            HeroNew a = new HeroNew(presets[0]);
-            HeroNew b = new HeroNew(presets[1]);
-            HeroNew c = new HeroNew(presets[2]);
-            HeroNew d = new HeroNew(presets[3]);
+            Hero a = new Hero(presets[0]);
+            Hero b = new Hero(presets[1]);
+            Hero c = new Hero(presets[2]);
+            Hero d = new Hero(presets[3]);
 
             RunData.PlayerParty = new HeroParty(a, b, c, d);
             Logger.Log("Party Created!");
@@ -195,7 +195,7 @@ namespace Tartarus
             presets[renderIndex]?.DrawBookmark(new Vector2(bookmarkTimer.Value, 20));
         }
 
-        private readonly Comparison<HeroNew> sortUnlocked = (x, y) =>
+        private readonly Comparison<Hero> sortUnlocked = (x, y) =>
         {
             if (x.IsUnlocked && !y.IsUnlocked)
                 return -1;

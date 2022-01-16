@@ -9,18 +9,18 @@ namespace Tartarus
 {
     public class EnemyRenderer : GraphicsComponent
     {
-        private EncounterNew encounter;
+        private Encounter encounter;
 
         private GTexture selector;
 
-        public ActorNew SelectedTarget;
-        public List<ActorNew> AvailableTargets;
+        public Actor SelectedTarget;
+        public List<Actor> AvailableTargets;
 
         private static int hpBarSpacing = 10;
         private static int selectorSpacing = 15;
         private static int spacingBetweenEnemies = 10;
 
-        public EnemyRenderer(Entity entity, EncounterNew encounter)
+        public EnemyRenderer(Entity entity, Encounter encounter)
             :base(entity, true)
         {
             this.encounter = encounter;

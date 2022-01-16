@@ -7,24 +7,24 @@ using Microsoft.Xna.Framework;
 
 namespace Tartarus
 {
-    public class EncounterNewEntity : Entity
+    public class EncounterEntity : Entity
     {
-        public EncounterNew Encounter { get; private set; }
+        public Encounter Encounter { get; private set; }
         private EnemyRenderer enemyRenderer;
         private HeroRenderer heroRenderer;
         private TargetList targetList;
         private SelectionMatrix options;
         private ParticleManager particles;
 
-        public ActorNew SelectedTarget => targetList.SelectedTarget;
-        public List<ActorNew> AvailableTargets => targetList.AvailableTargets;
+        public Actor SelectedTarget => targetList.SelectedTarget;
+        public List<Actor> AvailableTargets => targetList.AvailableTargets;
 
-        private ActorNew CurrentActor => Encounter.CurrentActor;
-        private HeroNew CurrentHero => Encounter.CurrentHero;
+        private Actor CurrentActor => Encounter.CurrentActor;
+        private Hero CurrentHero => Encounter.CurrentHero;
 
-        private EnemyNew CurrentEnemy => Encounter.CurrentEnemy;
+        private Enemy CurrentEnemy => Encounter.CurrentEnemy;
 
-        private SkillNew currentSkill = null;
+        private Skill currentSkill = null;
 
         public bool HeroesWin => Encounter.HeroesWin;
         public bool EnemiesWin => Encounter.EnemiesWin;
@@ -56,8 +56,8 @@ namespace Tartarus
                             options.Clear();
                             if (CurrentEnemy != null)
                             {
-                                SkillNew s = CurrentEnemy.AI.ChooseSkill(CurrentEnemy, Encounter);
-                                List<ActorNew> targets = CurrentEnemy.AI.ChooseTargets(s, Encounter);
+                                Skill s = CurrentEnemy.AI.ChooseSkill(CurrentEnemy, Encounter);
+                                List<Actor> targets = CurrentEnemy.AI.ChooseTargets(s, Encounter);
                                 Encounter.UseSkillAndProceed(s, targets);
                                 State = OptionStates.Options;
                             }
@@ -94,7 +94,7 @@ namespace Tartarus
             Targets
         }
 
-        private void RefreshTargets(SkillNew skill)
+        private void RefreshTargets(Skill skill)
         {
             targetList.RefreshTargets(skill);
             UpdateTargets();
@@ -109,7 +109,7 @@ namespace Tartarus
         }
 
 
-        public EncounterNewEntity(Scene scene, EncounterNew encounter) 
+        public EncounterEntity(Scene scene, Encounter encounter) 
             : base(scene)
         {
             Encounter = encounter;
@@ -128,9 +128,9 @@ namespace Tartarus
         {
             options.Clear();
             Button attack = new Button("Attack", () => 
-            { currentSkill = SkillNew.Attack; State = OptionStates.Targets; prevSelection = new Point(0, 0); });
+            { currentSkill = Skill.Attack; State = OptionStates.Targets; prevSelection = new Point(0, 0); });
             Button gun = new Button("Gun", () => 
-            { currentSkill = SkillNew.Gun; State = OptionStates.Targets; prevSelection = new Point(1, 0); });
+            { currentSkill = Skill.Gun; State = OptionStates.Targets; prevSelection = new Point(1, 0); });
             Button skill = new Button("Skill", () => 
             { State = OptionStates.Skills; prevSelection = new Point(2, 0); });
             Button item = new Button("Item", () => 
@@ -143,15 +143,15 @@ namespace Tartarus
             
             });
             Button guard = new Button("Guard", () => 
-            { currentSkill = SkillNew.Guard; State = OptionStates.Targets; prevSelection = new Point(1, 1); });
+            { currentSkill = Skill.Guard; State = OptionStates.Targets; prevSelection = new Point(1, 1); });
             Button pass = new Button("Pass", () => 
-            { currentSkill = SkillNew.Pass; State = OptionStates.Targets; prevSelection = new Point(2, 1); });
-            attack.IsSelectable = SkillNew.Attack.IsUsableBy(CurrentActor);
-            gun.IsSelectable = SkillNew.Gun.IsUsableBy(CurrentActor);
+            { currentSkill = Skill.Pass; State = OptionStates.Targets; prevSelection = new Point(2, 1); });
+            attack.IsSelectable = Skill.Attack.IsUsableBy(CurrentActor);
+            gun.IsSelectable = Skill.Gun.IsUsableBy(CurrentActor);
             skill.IsSelectable = CurrentActor.Skills.NonBasicSkills.Count > 0;
             item.IsSelectable = CurrentHero.HasItem;
-            guard.IsSelectable = SkillNew.Guard.IsUsableBy(CurrentActor);
-            pass.IsSelectable = SkillNew.Pass.IsUsableBy(CurrentActor);
+            guard.IsSelectable = Skill.Guard.IsUsableBy(CurrentActor);
+            pass.IsSelectable = Skill.Pass.IsUsableBy(CurrentActor);
 
             options.Add(attack, gun, skill, item, guard, pass);
         }
@@ -159,7 +159,7 @@ namespace Tartarus
         public void GenerateSkills()
         {
             options.Clear();
-            List<SkillNew> nonbasics = CurrentActor?.Skills.NonBasicSkills;
+            List<Skill> nonbasics = CurrentActor?.Skills.NonBasicSkills;
 
 
             for (int j = 0; j < 2; j++)
@@ -167,7 +167,7 @@ namespace Tartarus
                 for (int i = 0; i < 3; i++)
                 {
                     
-                    SkillNew tempSkill = (i + (j * 3) < nonbasics.Count) ? CurrentActor.Skills.NonBasicSkills[i + (j * 3)] : null;
+                    Skill tempSkill = (i + (j * 3) < nonbasics.Count) ? CurrentActor.Skills.NonBasicSkills[i + (j * 3)] : null;
                     Button temp;
                     if (tempSkill != null)
                     {

@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class AINew 
+    public class EnemyAI 
     {
-        public static AINew RandomSkillAndTarget = new AINew(SkillSelectTypes.Random, TargetSelectTypes.Random);
+        public static EnemyAI RandomSkillAndTarget = new EnemyAI(SkillSelectTypes.Random, TargetSelectTypes.Random);
 
         public SkillSelectTypes SkillSelectType { get; private set; }
         public TargetSelectTypes TargetSelectType { get; private set; }
 
 
-        public AINew(SkillSelectTypes skillSelectType, TargetSelectTypes targetSelectType)
+        public EnemyAI(SkillSelectTypes skillSelectType, TargetSelectTypes targetSelectType)
         {
             SkillSelectType = skillSelectType;
             TargetSelectType = targetSelectType;
         }
 
-        public AINew() 
+        public EnemyAI() 
             : this(SkillSelectTypes.Random, TargetSelectTypes.Random) { }
 
-        public SkillNew ChooseSkill(EnemyNew enemy, EncounterNew encounter)
+        public Skill ChooseSkill(Enemy enemy, Encounter encounter)
         {
             switch (SkillSelectType)
             {
@@ -34,9 +34,9 @@ namespace Tartarus
             }
         }
 
-        public List<ActorNew> ChooseTargets(SkillNew skill, EncounterNew encounter)
+        public List<Actor> ChooseTargets(Skill skill, Encounter encounter)
         {
-            List<ActorNew> temp = new List<ActorNew>();
+            List<Actor> temp = new List<Actor>();
             if (skill.HitsMultipleTargets)
             {
                 temp.AddRange(encounter.Heroes);

@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class ItemNew
+    public class ItemOLD
     {
-      
-
         public string Name { get; private set; }
-        public SkillNew Skill { get; private set; }
+        public SkillOLD Skill { get; private set; }
         public int Cost { get; private set; }
         public int MaxAmount { get; private set; }
 
-        public ItemNew(string name, SkillNew skill, int cost, int maxAmount)
+        public ItemOLD(string name, SkillOLD skill, int cost, int maxAmount)
         {
             Name = name;
             Skill = skill;
@@ -23,8 +21,7 @@ namespace Tartarus
             MaxAmount = maxAmount;
         }
 
-        public static ItemNew TeslaGrenade = new ItemNew("Tesla Grenade", SkillNew.ElecBomb, 50, 10);
-
+        public static ItemOLD TeslaGrenade = new ItemOLD("Tesla Grenade", SkillOLD.ElecBomb, 50, 10);
 
 
     }

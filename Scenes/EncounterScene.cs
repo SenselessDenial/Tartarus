@@ -10,7 +10,7 @@ namespace Tartarus
     public class EncounterScene : Scene
     {
 
-        private EncounterNewEntity ee;
+        private EncounterEntity ee;
 
         private GTexture box;
 
@@ -25,7 +25,7 @@ namespace Tartarus
             FillColor = Color.DarkTurquoise;
             Camera.Scale = new Vector2(4);
 
-            ee = new EncounterNewEntity(this, new EncounterNew(RunData.PlayerParty, RunData.CurrentEnemyParty, true));
+            ee = new EncounterEntity(this, new Encounter(RunData.PlayerParty, RunData.CurrentEnemyParty, true));
 
             box = new GTexture("herobox.png").ReplaceWithPattern(new GTexture("pattern.png"), Color.White);
         }

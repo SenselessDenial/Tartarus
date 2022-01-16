@@ -9,12 +9,12 @@ namespace Tartarus
 {
     public static class ActorPresets
     {
-        public static HeroNew Anna { get; private set; }
-        public static HeroNew Sophie { get; private set; }
-        public static HeroNew Eva { get; private set; }
-        public static HeroNew Madeline { get; private set; }
+        public static Hero Anna { get; private set; }
+        public static Hero Sophie { get; private set; }
+        public static Hero Eva { get; private set; }
+        public static Hero Madeline { get; private set; }
 
-        public static EnemyNew Beast { get; private set; }
+        public static Enemy Beast { get; private set; }
 
         private static Tileset portraits;
         private static Tileset heroIcons;
@@ -25,36 +25,36 @@ namespace Tartarus
             heroIcons = new Tileset("heroicons.png", 32, 16);
             
             // Anna
-            Anna = new HeroNew("Anna", 2, 3, 8, 4, 8, 5);
+            Anna = new Hero("Anna", 2, 3, 8, 4, 8, 5);
             Anna.SetItems(portraits[0], heroIcons[0], new Color(222, 106, 60));
-            Anna.AddSkill(SkillNew.Fireball);
-            Anna.AddSkill(SkillNew.Heal);
-            Anna.AddSkill(SkillNew.ElecBomb);
+            Anna.AddSkill(Skill.Fireball);
+            Anna.AddSkill(Skill.Heal);
+            Anna.AddSkill(Skill.ElecBomb);
             Anna.IsUnlocked = true;
 
             // Sophie
-            Sophie = new HeroNew("Sophie", 5, 8, 3, 4, 3, 7);
+            Sophie = new Hero("Sophie", 5, 8, 3, 4, 3, 7);
             Sophie.SetItems(portraits[1], heroIcons[1], new Color(54, 89, 64));
             Sophie.IsUnlocked = true;
 
             // Eva
-            Eva = new HeroNew("Eva", 12, 2, 1, 6, 5, 4);
+            Eva = new Hero("Eva", 12, 2, 1, 6, 5, 4);
             Eva.SetItems(portraits[2], heroIcons[2], new Color(247, 107, 214));
             Eva.IsUnlocked = true;
 
             // Madeline
-            Madeline = new HeroNew("Madeline", 4, 4, 10, 4, 4, 4);
+            Madeline = new Hero("Madeline", 4, 4, 10, 4, 4, 4);
             Madeline.SetItems(portraits[3], heroIcons[3], new Color(51, 230, 212));
             Madeline.IsUnlocked = true;
-            Madeline.AddSkill(SkillNew.Heal, SkillNew.Revive);
+            Madeline.AddSkill(Skill.Heal, Skill.Revive);
             
 
             ////// Enemy Presets
 
             // Beast
-            Beast = new EnemyNew("Beast", 5, 5, 5, 5, 5, 5, 1, 0, Affiliations.None, 3);
+            Beast = new Enemy("Beast", 5, 5, 5, 5, 5, 5, 1, 0, Affiliations.None, 3);
             Beast.SetItems(new GTexture("wolf.png"));
-            Beast.AddSkill(SkillNew.Bash);
+            Beast.AddSkill(Skill.Bash);
             Beast.AddInnateResistance(Elements.Fire, Resistances.Weak);
 
 

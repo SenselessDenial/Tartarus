@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class Encounter
+    public class EncounterOLD
     {
-        public Party Alpha { get; private set; }
-        public Party Beta { get; private set; }
-        public Party ActiveParty { get; private set; }
-        public Party InactiveParty => (ActiveParty == Alpha) ? Beta : Alpha;
-        public Actor CurrentActor { get; private set; }
+        public PartyOLD Alpha { get; private set; }
+        public PartyOLD Beta { get; private set; }
+        public PartyOLD ActiveParty { get; private set; }
+        public PartyOLD InactiveParty => (ActiveParty == Alpha) ? Beta : Alpha;
+        public ActorOLD CurrentActor { get; private set; }
 
         public bool IsOver => Alpha.IsAllDead || Beta.IsAllDead;
 
-        public Encounter(Party alpha, Party beta)
+        public EncounterOLD(PartyOLD alpha, PartyOLD beta)
         {
             Alpha = alpha;
             Beta = beta;
@@ -53,7 +53,7 @@ namespace Tartarus
                 Logger.Log("Encounter is over! There is no need to cycle.");
         }
 
-        public bool UseSkill(Skill skill, Actor user, Actor target)
+        public bool UseSkill(SkillOLD skill, ActorOLD user, ActorOLD target)
         {
             if (IsOver)
                 Logger.Log("Encounter is already over! Skill not used.");
@@ -81,7 +81,7 @@ namespace Tartarus
             return false;
         }
 
-        public bool Contains(Actor actor)
+        public bool Contains(ActorOLD actor)
         {
             return Alpha.Contains(actor) || Beta.Contains(actor);
         }

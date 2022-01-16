@@ -8,20 +8,20 @@ namespace Tartarus
 {
     public class TargetList : Component
     {
-        private EncounterNew encounter;
-        public ActorNew SelectedTarget { get; private set; }
-        public List<ActorNew> AvailableTargets { get; private set; }
-        private ActorNew CurrentActor => encounter.CurrentActor;
+        private Encounter encounter;
+        public Actor SelectedTarget { get; private set; }
+        public List<Actor> AvailableTargets { get; private set; }
+        private Actor CurrentActor => encounter.CurrentActor;
         private bool IsHeroesTurn => encounter.IsHeroesTurn;
 
-        public TargetList(Entity entity, EncounterNew encounter) : base(entity)
+        public TargetList(Entity entity, Encounter encounter) : base(entity)
         {
             this.encounter = encounter;
             SelectedTarget = null;
-            AvailableTargets = new List<ActorNew>();
+            AvailableTargets = new List<Actor>();
         }
 
-        public void RefreshTargets(SkillNew skill)
+        public void RefreshTargets(Skill skill)
         {
             AvailableTargets.Clear();
             SelectedTarget = null;

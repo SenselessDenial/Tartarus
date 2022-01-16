@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class SkillSet : IEnumerable<Skill>
+    public class SkillSet
     {
         public Actor Actor { get; private set; }
 
         private readonly List<Skill> skills;
-        public Skill this[int index] => skills[index];
-        public int Count => skills.Count;
-        public List<Skill> UsableSkills => (from item in skills
-                                            where item.IsUsableBy(Actor)
-                                            select item).ToList();
 
         public List<Skill> NonBasicSkills => (from item in skills
                                               where !Skill.IsBasic(item)
                                               select item).ToList();
+
+        public List<Skill> UsableSkills => (from item in skills
+                                               where item.IsUsableBy(Actor)
+                                               select item).ToList();
 
         public SkillSet(Actor actor)
         {
@@ -30,26 +28,20 @@ namespace Tartarus
             Add(Skill.Attack);
         }
 
-        public void Add(Skill skill)
+        public void Add(Skill SkillNew)
         {
-            if (!skills.Contains(skill))
-                skills.Add(skill);
+            if (!skills.Contains(SkillNew))
+                skills.Add(SkillNew);
         }
 
-        public void Remove(Skill skill)
+        public void Remove(Skill SkillNew)
         {
-            skills.Remove(skill);
+            skills.Remove(SkillNew);
         }
 
-        public bool Contains(Skill skill)
+        public bool Contains(Skill SkillNew)
         {
-            return skills.Contains(skill);
-        }
-
-        public void Print()
-        {
-            foreach (var item in skills)
-                Logger.Log(item.Name);
+            return skills.Contains(SkillNew);
         }
 
         public void SortByElement()
@@ -60,19 +52,9 @@ namespace Tartarus
         public SkillSet Copy(Actor actor)
         {
             SkillSet temp = new SkillSet(actor);
-            foreach (var skill in skills)
-                temp.Add(skill);
+            foreach (var SkillNew in skills)
+                temp.Add(SkillNew);
             return temp;
-        }
-
-        public IEnumerator<Skill> GetEnumerator()
-        {
-            return skills.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return skills.GetEnumerator();
         }
 
         private Comparison<Skill> sortElement = (Skill x, Skill y) =>
@@ -81,6 +63,12 @@ namespace Tartarus
                 return -1;
             else return x.Element > y.Element ? 1 : 0;
         };
+
+
+
+
+
+
 
     }
 }

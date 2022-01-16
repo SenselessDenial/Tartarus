@@ -7,12 +7,29 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class Party : IEnumerable<Actor>
+    public abstract class Party<T> : IEnumerable<T> where T : Actor
     {
-        
-        private List<Actor> actors;
-        public int Capacity { get; private set; }
+        protected List<T> actors = new List<T>();
         public int Count => actors.Count;
+        public Party()
+        {
+            actors = new List<T>();
+        }
+
+        public Party(params T[] actors)
+        {
+            foreach (var item in actors)
+                Add(item);
+        }
+
+        public void Add(T actor)
+        {
+            if (!actors.Contains(actor))
+                actors.Add(actor);
+        }
+
+        public T this[int index] => (index >= 0 && index < Count) ? actors[index] : null;
+
         public bool IsAllDead
         {
             get
@@ -23,7 +40,8 @@ namespace Tartarus
                 return true;
             }
         }
-        public Actor FirstLivingActor
+
+        public T FirstLivingActor
         {
             get
             {
@@ -34,7 +52,8 @@ namespace Tartarus
                 return null;
             }
         }
-        public Actor LastLivingActor
+
+        public T LastLivingActor
         {
             get
             {
@@ -46,40 +65,16 @@ namespace Tartarus
             }
         }
 
-        public Actor this[int index] => index >= 0 && index < actors.Count ? actors[index] : throw new Exception("Party_this index not in bounds.");
+        public int IndexOfFirstLivingActor => actors.IndexOf(FirstLivingActor);
+        public int IndexOfLastLivingActor => actors.IndexOf(LastLivingActor);
 
-        public Party(int capacity, params Actor[] actors)
-        {
-            this.actors = new List<Actor>();
-            Capacity = capacity;
-            foreach (var item in actors)
-                Add(item);
-        }
+        public int NumOfLivingActors => (from item in actors
+                                         where !item.IsDead
+                                         select item).Count();
 
-        public Party(int capacity)
-        {
-            actors = new List<Actor>();
-            Capacity = capacity;
-        }
 
-        public Party(params Actor[] actors)
-        {
-            this.actors = new List<Actor>();
-            Capacity = actors.Length;
-            foreach (var item in actors)
-                Add(item);
-        }
 
-        public void Add(Actor actor)
-        {
-            if (Count >= Capacity)
-                Logger.Log(actor.Name + " could not be added to party because party is full.");
-            else
-                actors.Add(actor);
-                actor.Party = this;
-        }
-
-        public Actor NextLivingActor(int startingIndex)
+        public T NextLivingActor(int startingIndex)
         {
             for (int i = startingIndex + 1; i < actors.Count; i++)
                 if (actors[i].IsDead == false)
@@ -88,57 +83,40 @@ namespace Tartarus
             return null;
         }
 
-        public Actor NextLivingActor(Actor actor)
+        public int IndexOfNextLivingActor(int startingIndex)
         {
-            if (actors.Contains(actor))
-                return NextLivingActor(IndexOf(actor));
-            else
+            if (NextLivingActor(startingIndex) == null)
             {
-                Logger.Log("Party does not contain actor " + actor.Name);
-                return null;
+                Logger.Log("There is no next living actor. returning index of -1.");
+                return -1;
             }
+            return actors.IndexOf(NextLivingActor(startingIndex));
         }
 
-        public void ReceiveXP(Party party)
-        {
-            ReceiveXP(party.CalculateXPDrop());
-        }
-
-        public void ReceiveXP(int xp)
-        {
-            int xpPerMember = Calc.FindNearestDivisible(xp, Count) / Count;
-            foreach (var member in actors)
-                member.ReceiveXP(xpPerMember);
-        }
-
-        public int IndexOf(Actor actor)
+        public int IndexOf(T actor)
         {
             return actors.IndexOf(actor);
         }
 
-        public bool Contains(Actor actor)
+        public T RandomLivingActor()
         {
-            return actors.Contains(actor);
+            List<T> living = new List<T>();
+            foreach (var item in actors)
+            {
+                if (!item.IsDead)
+                    living.Add(item);
+            }
+            return Calc.ChooseRandom(living);
         }
 
-        public IEnumerator<Actor> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-            return actors.GetEnumerator();
+            return ((IEnumerable<T>)actors).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return ((IEnumerable)actors).GetEnumerator();
         }
-
-        public int CalculateXPDrop()
-        {
-            int temp = 0;
-            foreach (var item in actors)
-                temp += item.CalculateXPDrop();
-            return temp;
-        }
-
-
     }
 }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class EncounterNew
+    public class Encounter
     {
         public HeroParty Heroes { get; private set; }
         public EnemyParty Enemies { get; private set; }
 
-        public ActorNew CurrentActor => IsHeroesTurn ? Heroes[CurrentIndex] : (ActorNew)Enemies[CurrentIndex];
-        public HeroNew CurrentHero => IsHeroesTurn ? Heroes[CurrentIndex] : null;
-        public EnemyNew CurrentEnemy => !IsHeroesTurn ? Enemies[CurrentIndex] : null;
+        public Actor CurrentActor => IsHeroesTurn ? Heroes[CurrentIndex] : (Actor)Enemies[CurrentIndex];
+        public Hero CurrentHero => IsHeroesTurn ? Heroes[CurrentIndex] : null;
+        public Enemy CurrentEnemy => !IsHeroesTurn ? Enemies[CurrentIndex] : null;
 
         public bool IsHeroesTurn { get; private set; }
         private int CurrentIndex;
@@ -23,7 +23,7 @@ namespace Tartarus
         public bool HeroesWin => Enemies.IsAllDead;
         public bool EnemiesWin => Heroes.IsAllDead;
 
-        public EncounterNew(HeroParty heroes, EnemyParty enemies, bool heroesGoFirst)
+        public Encounter(HeroParty heroes, EnemyParty enemies, bool heroesGoFirst)
         {
             Heroes = heroes;
             Enemies = enemies;
@@ -31,7 +31,7 @@ namespace Tartarus
             CurrentIndex = heroesGoFirst ? Heroes.IndexOfFirstLivingActor : Enemies.IndexOfFirstLivingActor;
         }
 
-        private void UseSkill(SkillNew skill, int indexOfTarget)
+        private void UseSkill(Skill skill, int indexOfTarget)
         {
             if (IsOver)
             {
@@ -39,13 +39,13 @@ namespace Tartarus
                 return;
             }
 
-            ActorNew user = CurrentActor;
-            ActorNew target;
+            Actor user = CurrentActor;
+            Actor target;
 
             if (IsHeroesTurn && indexOfTarget >= 0 && indexOfTarget < Heroes.Count)
-                target = skill.Type == SkillTypes.Damage ? Enemies[indexOfTarget] : (ActorNew)Heroes[indexOfTarget];
+                target = skill.Type == SkillTypes.Damage ? Enemies[indexOfTarget] : (Actor)Heroes[indexOfTarget];
             else if (!IsHeroesTurn && indexOfTarget >= 0 && indexOfTarget < Enemies.Count)
-                target = skill.Type == SkillTypes.Damage ? Heroes[indexOfTarget] : (ActorNew)Enemies[indexOfTarget];
+                target = skill.Type == SkillTypes.Damage ? Heroes[indexOfTarget] : (Actor)Enemies[indexOfTarget];
             else
             {
                 Logger.Log("Index is out of range. Cannot proceed in encounter.");
@@ -91,7 +91,7 @@ namespace Tartarus
             }
         }
 
-        public void UseSkillAndProceed(SkillNew skill, IEnumerable<ActorNew> targets)
+        public void UseSkillAndProceed(Skill skill, IEnumerable<Actor> targets)
         {
             if (IsOver)
             {
@@ -99,7 +99,7 @@ namespace Tartarus
                 return;
             }
 
-            ActorNew user = CurrentActor;
+            Actor user = CurrentActor;
 
             if (user == null || targets == null)
             {
@@ -144,19 +144,19 @@ namespace Tartarus
             }
         }
 
-        public void UseSkillAndProceed(SkillNew skill, params ActorNew[] targets)
+        public void UseSkillAndProceed(Skill skill, params Actor[] targets)
         {
-            UseSkillAndProceed(skill, (IEnumerable<ActorNew>)targets);
+            UseSkillAndProceed(skill, (IEnumerable<Actor>)targets);
         }
 
-        private void UseSkill(SkillNew skill, ActorNew target)
+        private void UseSkill(Skill skill, Actor target)
         {
             if (Heroes.Contains(target))
-                UseSkill(skill, (HeroNew)target);
+                UseSkill(skill, (Hero)target);
             else if (Enemies.Contains(target))
-                UseSkill(skill, (EnemyNew)target);
+                UseSkill(skill, (Enemy)target);
         }
-        private void UseSkill(SkillNew skill, HeroNew target)
+        private void UseSkill(Skill skill, Hero target)
         {
             if (IsOver)
             {
@@ -177,7 +177,7 @@ namespace Tartarus
                 Logger.Log(user.Name + "'s attack on " + target.Name + " has missed.");
             }
         }
-        private void UseSkill(SkillNew skill, EnemyNew target)
+        private void UseSkill(Skill skill, Enemy target)
         {
             if (IsOver)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class EnemyParty : PartyNew<EnemyNew>
+    public class EnemyParty : Party<Enemy>
     {
 
         public int MoneyDrop
@@ -34,7 +34,7 @@ namespace Tartarus
         public EnemyParty()
             : base() { }
 
-        public EnemyParty(params EnemyNew[] enemies)
+        public EnemyParty(params Enemy[] enemies)
             : base(enemies) { }
 
 

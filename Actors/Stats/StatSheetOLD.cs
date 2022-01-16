@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class StatSheetNew
+    public class StatSheetOLD
     {
-        public ActorNew Actor { get; private set; }
+        public ActorOLD Actor { get; private set; }
         public Stat HP { get; private set; }
         public Stat MP { get; private set; }
         public Stat Strength { get; private set; }
-        public Stat Dexterity { get; private set; }
         public Stat Magic { get; private set; }
         public Stat Endurance { get; private set; }
         public Stat Resilience { get; private set; }
@@ -23,8 +23,8 @@ namespace Tartarus
 
         public bool CanLevelUp => XP >= XPToNext;
         public int XPToNext => XPFormula(Level);
-        private readonly Func<int, int> XPFormula = (int level) => level * level * 5;
-        internal static int MaxLevel => 100;
+        private readonly Func<int, int> XPFormula = (int level) => 100 * level * (level + 1);
+        internal static int MaxLevel = 100;
 
         public int this[Stats stat]
         {
@@ -38,8 +38,6 @@ namespace Tartarus
                         return MP.Value;
                     case Stats.Strength:
                         return Strength.Value;
-                    case Stats.Dexterity:
-                        return Dexterity.Value;
                     case Stats.Magic:
                         return Magic.Value;
                     case Stats.Endurance:
@@ -67,9 +65,6 @@ namespace Tartarus
                     case Stats.Strength:
                         Strength.Value = value;
                         break;
-                    case Stats.Dexterity:
-                        Dexterity.Value = value;
-                        break;
                     case Stats.Magic:
                         Magic.Value = value;
                         break;
@@ -89,12 +84,11 @@ namespace Tartarus
             }
         }
 
-        public StatSheetNew(ActorNew actor, int strength, int dexterity, int magic, int endurance, int resilience, int speed,
-                         int strWeight, int dexWeight, int magWeight, int endWeight, int resWeight, int spdWeight, int level, int xp)
+        private StatSheetOLD(ActorOLD actor, int strength, int magic, int endurance, int resilience, int speed,
+                         int strWeight, int magWeight, int endWeight, int resWeight, int spdWeight, int level, int xp)
         {
             Actor = actor;
             Strength = new Stat(strength, 99, strWeight);
-            Dexterity = new Stat(dexterity, 99, dexWeight);
             Magic = new Stat(magic, 99, magWeight);
             Endurance = new Stat(endurance, 99, endWeight);
             Resilience = new Stat(resilience, 99, resWeight);
@@ -106,32 +100,21 @@ namespace Tartarus
             MP = new Stat(CalculateMaxMP());
         }
 
-        public StatSheetNew(ActorNew actor, int strength, int dexterity, int magic, int endurance, int resilience, int speed,
-                         int strWeight, int dexWeight, int magWeight, int endWeight, int resWeight, int spdWeight)
-            : this(actor, strength, dexterity, magic, endurance, resilience, speed,
-                         strWeight, dexWeight, magWeight, endWeight, resWeight, spdWeight, 1, 0)
-        { }
+        public StatSheetOLD(ActorOLD actor, int strength, int magic, int endurance, int resilience, int speed,
+                         int strWeight, int magWeight, int endWeight, int resWeight, int spdWeight)
+            : this(actor, strength, magic, endurance, resilience, speed,
+                         strWeight, magWeight, endWeight, resWeight, spdWeight, 1, 0) { }
 
-        public StatSheetNew(ActorNew actor, int strength, int dexterity, int magic, int endurance, int resilience, int speed, int level, int xp)
-            : this(actor, strength, dexterity, magic, endurance, resilience, speed, 1, 1, 1, 1, 1, 1, level, xp) { }
+        public StatSheetOLD(ActorOLD actor, int strength, int magic, int endurance, int resilience, int speed)
+            : this(actor, strength, magic, endurance, resilience, speed, 20, 20, 20, 20, 20) { }
 
-        public StatSheetNew(ActorNew actor, int strength, int dexterity, int magic, int endurance, int resilience, int speed)
-            : this(actor, strength, dexterity, magic, endurance, resilience, speed, 1, 1, 1, 1, 1, 1) { }
+        public StatSheetOLD(ActorOLD actor)
+            : this(actor, 5, 5, 5, 5, 5, 20, 20, 20, 20, 20) { }
 
-        public StatSheetNew(ActorNew actor)
-            : this(actor, 5, 5, 5, 5, 5, 5, 1, 1, 1, 1, 1, 1) { }
-
-        public StatSheetNew Copy(ActorNew actor)
-        {
-            return new StatSheetNew(actor, Strength.Value, Dexterity.Value, Magic.Value, Endurance.Value, Resilience.Value, Speed.Value,
-                                   Strength.Weight, Dexterity.Weight, Magic.Weight, Endurance.Weight, Resilience.Weight, Speed.Weight, Level, XP);
-        }
-
-        private void IncrementRandom()
+        public void IncrementRandom()
         {
             ChoicePool<Stats> statPool = new ChoicePool<Stats>();
             statPool.Add(Stats.Strength, Strength.Weight);
-            statPool.Add(Stats.Dexterity, Dexterity.Weight);
             statPool.Add(Stats.Magic, Magic.Weight);
             statPool.Add(Stats.Endurance, Endurance.Weight);
             statPool.Add(Stats.Resilience, Resilience.Weight);
@@ -158,7 +141,7 @@ namespace Tartarus
             return (int)(a + b + c);
         }
 
-        internal void LevelUp()
+        public void LevelUp()
         {
             if (Level >= MaxLevel)
             {
@@ -188,6 +171,12 @@ namespace Tartarus
                + "\nEND: " + Endurance.Value
                + "\nRES: " + Resilience.Value
                + "\nSPD: " + Speed.Value;
+        }
+
+        public StatSheetOLD Copy(ActorOLD actor)
+        {
+            return new StatSheetOLD(actor, Strength.Value, Magic.Value, Endurance.Value, Resilience.Value, Speed.Value,
+                                   Strength.Weight, Magic.Weight, Endurance.Weight, Resilience.Weight, Speed.Weight, Level, XP);
         }
 
 

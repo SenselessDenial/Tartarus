@@ -10,12 +10,12 @@ namespace Tartarus
 {
     public class EncounterManager : Component
     {
-        public Encounter Encounter { get; private set; }
-        public Party ActiveParty => Encounter.ActiveParty;
-        public Actor CurrentActor => Encounter.CurrentActor;
-        private Actor previousActor;
-        private Actor currentTarget = null;
-        private Skill currentSkill = null;
+        public EncounterOLD Encounter { get; private set; }
+        public PartyOLD ActiveParty => Encounter.ActiveParty;
+        public ActorOLD CurrentActor => Encounter.CurrentActor;
+        private ActorOLD previousActor;
+        private ActorOLD currentTarget = null;
+        private SkillOLD currentSkill = null;
 
         public bool IsOver => Encounter.IsOver;
 
@@ -61,7 +61,7 @@ namespace Tartarus
         private RadioButtonSet targets;
 
 
-        public EncounterManager(Encounter encounter)
+        public EncounterManager(EncounterOLD encounter)
         {
             Encounter = encounter;
             choices = new RadioButtonSet(new Vector2(20, 20), true);
@@ -71,8 +71,8 @@ namespace Tartarus
             Reset();
         }
 
-        public EncounterManager(Party alpha, Party beta) 
-            : this(new Encounter(alpha, beta)) { }
+        public EncounterManager(PartyOLD alpha, PartyOLD beta) 
+            : this(new EncounterOLD(alpha, beta)) { }
 
         private void Reset()
         {
@@ -92,12 +92,12 @@ namespace Tartarus
 
             Button attack = new Button("attack", () => 
             {
-                currentSkill = Skill.Attack;
+                currentSkill = SkillOLD.Attack;
                 CurrentChoice = targets;
             });
             Button gun = new Button("gun", () =>
             {
-                currentSkill = Skill.Gun;
+                currentSkill = SkillOLD.Gun;
                 CurrentChoice = targets;
             });
             Button skill = new Button("skill", () =>
@@ -112,23 +112,23 @@ namespace Tartarus
             });
             Button guard = new Button("guard", () =>
             {
-                currentSkill = Skill.Guard;
+                currentSkill = SkillOLD.Guard;
                 CurrentChoice = targets;
             });
             Button pass = new Button("pass", () =>
             {
-                currentSkill = Skill.Pass;
+                currentSkill = SkillOLD.Pass;
                 CurrentChoice = targets;
             });
-            if (!CurrentActor.HasSkill(Skill.Gun))
+            if (!CurrentActor.HasSkill(SkillOLD.Gun))
                 gun.IsSelectable = false;
             if (CurrentActor.Skills.NonBasicSkills.Count == 0)
                 skill.IsSelectable = false;
             if (CurrentActor.HeldItem == null)
                 item.IsSelectable = false;
-            if (!CurrentActor.HasSkill(Skill.Guard))
+            if (!CurrentActor.HasSkill(SkillOLD.Guard))
                 guard.IsSelectable = false;
-            if (!CurrentActor.HasSkill(Skill.Pass))
+            if (!CurrentActor.HasSkill(SkillOLD.Pass))
                 pass.IsSelectable = false;
 
             choices.Add(attack, gun, skill, item, guard, pass);

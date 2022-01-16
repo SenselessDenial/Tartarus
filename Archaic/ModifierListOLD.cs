@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class ModifierListNew
+    public class ModifierListOLD
     {
-        public ActorNew Actor { get; private set; }
+        public ActorOLD Actor { get; private set; }
         private Dictionary<Elements, Resistances> innateResistances;
         private Dictionary<Elements, OffensiveBonuses> innateOffensiveBonuses;
 
@@ -17,10 +17,10 @@ namespace Tartarus
                                        select item).Count();
 
         public int NumOfResistances => (from item in innateResistances
-                                        where item.Value == Resistances.Strong
-                                        select item).Count();
+                                       where item.Value == Resistances.Strong
+                                       select item).Count();
 
-        public ModifierListNew(ActorNew actor)
+        public ModifierListOLD(ActorOLD actor)
         {
             Actor = actor;
             innateResistances = new Dictionary<Elements, Resistances>();
@@ -57,9 +57,9 @@ namespace Tartarus
             return innateOffensiveBonuses.ContainsKey(element) ? innateOffensiveBonuses[element] : OffensiveBonuses.None;
         }
 
-        public ModifierListNew Copy(ActorNew actor)
+        public ModifierListOLD Copy(ActorOLD actor)
         {
-            ModifierListNew temp = new ModifierListNew(actor);
+            ModifierListOLD temp = new ModifierListOLD(actor);
             foreach (var item in innateResistances)
                 temp.AddInnateResistance(item.Key, item.Value);
             foreach (var item in innateOffensiveBonuses)
@@ -69,4 +69,14 @@ namespace Tartarus
 
 
     }
+
+    public enum OffensiveBonuses
+    {
+        Great = 2,
+        Good = 1,
+        None = 0,
+        Bad = -1,
+        Awful = -2
+    }
+
 }

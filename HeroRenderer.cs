@@ -9,17 +9,17 @@ namespace Tartarus
 {
     public class HeroRenderer : GraphicsComponent
     {
-        private EncounterNew encounter;
+        private Encounter encounter;
 
         private GTexture selector;
 
-        public ActorNew SelectedTarget;
-        public List<ActorNew> AvailableTargets;
+        public Actor SelectedTarget;
+        public List<Actor> AvailableTargets;
         private static int selectorSpacing = 15;
 
         private GTexture turnIcon;
 
-        public HeroRenderer(Entity entity, EncounterNew encounter) 
+        public HeroRenderer(Entity entity, Encounter encounter) 
             : base(entity, true)
         {
             this.encounter = encounter;
@@ -40,9 +40,9 @@ namespace Tartarus
                     turnIcon.Draw(pos + new Vector2(0, -1), DrawAlignment.BottomLeft);
 
                 if ((SelectedTarget == null && AvailableTargets.Contains(item)) || SelectedTarget == item)
-                    selector.Draw(pos + new Vector2((HeroNew.CardBase.Width / 2), -selectorSpacing), DrawAlignment.TopCenter);
+                    selector.Draw(pos + new Vector2((Hero.CardBase.Width / 2), -selectorSpacing), DrawAlignment.TopCenter);
 
-                pos.X += HeroNew.CardBase.Width - 1;
+                pos.X += Hero.CardBase.Width - 1;
             }
         }
 

@@ -96,7 +96,7 @@ namespace Tartarus
         {
             RoomNode a = new RoomNode();
 
-            EnemyNew beast = new EnemyNew(ActorPresets.Beast);
+            Enemy beast = new Enemy(ActorPresets.Beast);
             beast.SetMoney(5, 200);
             EncounterNode b = new EncounterNode(beast);
             RoomNode c = new MoneyNode();

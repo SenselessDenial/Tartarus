@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Tartarus
 {
-    public class HeroParty : PartyNew<HeroNew>
+    public class HeroParty : Party<Hero>
     {
        
         public HeroParty() 
             : base() { }
 
-        public HeroParty(params HeroNew[] heroes) 
+        public HeroParty(params Hero[] heroes) 
             : base(heroes) { }
 
         public void ReceiveXP(int xp)
