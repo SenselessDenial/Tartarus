@@ -14,6 +14,7 @@ namespace Tartarus
         private HeroRenderer heroRenderer;
         private TargetList targetList;
         private SelectionMatrix options;
+        private ParticleManager particles;
 
         public ActorNew SelectedTarget => targetList.SelectedTarget;
         public List<ActorNew> AvailableTargets => targetList.AvailableTargets;
@@ -119,6 +120,7 @@ namespace Tartarus
             options = new SelectionMatrix(this, 3, 2, 50, 15);
             options.Offset = new Vector2(Scene.Camera.Width / 2, Scene.Camera.Height - 40);
             options.FocusPoint = new Point(1, 0);
+            particles = new ParticleManager(this);
             State = OptionStates.Options;
         }
 

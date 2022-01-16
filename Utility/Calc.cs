@@ -35,6 +35,11 @@ namespace Tartarus
             return random.Next(min, max);
         }
 
+        public static float NextFloat(float min, float max)
+        {
+            return (max - min) * (float)random.NextDouble() + min;
+        }
+
         public static int NextRange(int midpoint, int amplitude)
         {
             return midpoint + Next(-amplitude, amplitude);
@@ -168,6 +173,28 @@ namespace Tartarus
         {
             int index = Calc.Next(0, list.Count);
             return list[index];
+
+        }
+
+        public static Vector2 FindVector(Vector2 direction, float magnitude)
+        {
+            Vector2 vec = direction;
+            vec.Normalize();
+            vec *= magnitude;
+            return vec;
+        }
+
+        public static Vector2 UnitVectorFromAngle(float angle)
+        {
+            return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
+        }
+
+        public static Vector2 RandomVectorFromAngle(float minAngle, float maxAngle, float magnitude)
+        {
+            float angle = NextFloat(minAngle, maxAngle);
+            Vector2 vec = UnitVectorFromAngle(angle);
+            vec *= magnitude;
+            return vec;
 
         }
 

@@ -14,6 +14,7 @@ namespace Tartarus
 
         Entity helper;
         NumberDisplayer money;
+        ParticleManager pm;
 
 
         private MapReader reader;
@@ -37,6 +38,8 @@ namespace Tartarus
             helper = new Entity(this);
             money = new NumberDisplayer(helper, 0, 0.008f);
             money.Offset = new Vector2(this.Camera.Width - 50, 0f);
+            pm = new ParticleManager(helper);
+            
 
             reader = new MapReader(this);
         }
@@ -52,6 +55,9 @@ namespace Tartarus
         {
             base.Update();
             money.TargetNum = RunData.Money;
+
+            if (Input.Pressed(Microsoft.Xna.Framework.Input.Keys.K))
+                pm.Spawn(Calc.Next(10, 100), new Vector2(90, 50));
         }
 
         public override void Render()

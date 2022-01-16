@@ -35,6 +35,11 @@ namespace Tartarus
             Portrait = portrait;
         }
 
+        public void SetMoney(int min, int max)
+        {
+            Money = Calc.Next(min, max + 1);
+        }
+
         public int CalculateXPDrop()
         {
             double a = -0.1 * Modifiers.NumOfWeaknesses;
