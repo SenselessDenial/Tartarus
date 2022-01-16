@@ -64,7 +64,7 @@
     <Compile Include="Components\Background.cs" />
     <Compile Include="Utility\Ease.cs" />
     <Compile Include="Actors\Encounters\Encounter.cs" />
-    <Compile Include="EncounterEntity.cs" />
+    <Compile Include="Entities\EncounterEntity.cs" />
     <Compile Include="Actors\Enemy.cs" />
     <Compile Include="Actors\Parties\EnemyParty.cs" />
     <Compile Include="EnemyRenderer.cs" />
@@ -170,6 +170,7 @@
     <Content Include="bin\Windows\x86\Debug\Resources\hero_card.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\Imposter_enemy.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\jingle.wav" />
+    <Content Include="bin\Windows\x86\Debug\Resources\miss.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\moneysound.wav" />
     <Content Include="bin\Windows\x86\Debug\Resources\mouseClick.wav" />
     <Content Include="bin\Windows\x86\Debug\Resources\newfont.xml" />

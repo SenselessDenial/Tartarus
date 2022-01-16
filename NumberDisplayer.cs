@@ -16,6 +16,9 @@ namespace Tartarus
         private float time;
         private SoundEffect moneySFX;
 
+        public override int Width => 0;
+        public override int Height => 0;
+
         public NumberDisplayer(Entity entity, int targetNum, float duration)
             : base(entity, true)
         {

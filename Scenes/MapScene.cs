@@ -57,7 +57,7 @@ namespace Tartarus
             money.TargetNum = RunData.Money;
 
             if (Input.Pressed(Microsoft.Xna.Framework.Input.Keys.K))
-                pm.Spawn(Calc.Next(10, 100), new Vector2(90, 50));
+                pm.Spawn(ParticleManager.ParticleID.Miss, Calc.Next(-500, -10), new Vector2(90, 50));
         }
 
         public override void Render()
