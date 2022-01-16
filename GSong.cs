@@ -12,20 +12,25 @@ namespace Tartarus
     class GSong
     {
         private Song Song;
+        private float Volume = 1f;
 
 
-        public GSong()
+        public GSong(string name, string filename, float volume)
         {
-            Song = Calc.SongFromFile("abc", "Triumphant.wav");
+            Song = Calc.SongFromFile(name, filename);
+            Volume = volume;
         }
 
         public void Play()
         {
             MediaPlayer.Play(Song);
+            MediaPlayer.Volume = Volume;
+        }
 
-            
-
-
+        public void Stop()
+        {
+            if (MediaPlayer.Queue.ActiveSong == Song)
+                MediaPlayer.Stop();
         }
 
 

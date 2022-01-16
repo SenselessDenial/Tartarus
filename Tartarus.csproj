@@ -76,6 +76,7 @@
     <Compile Include="ItemNew.cs" />
     <Compile Include="Maps\MoneyNode.cs" />
     <Compile Include="ModifierListNew.cs" />
+    <Compile Include="NumberDisplayer.cs" />
     <Compile Include="PartyNew.cs" />
     <Compile Include="Rendering\Camera.cs" />
     <Compile Include="Entities\CharacterPicker.cs" />
@@ -168,6 +169,8 @@
     <Content Include="bin\Windows\x86\Debug\Resources\hero_bookmark.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\hero_card.png" />
     <Content Include="bin\Windows\x86\Debug\Resources\Imposter_enemy.png" />
+    <Content Include="bin\Windows\x86\Debug\Resources\jingle.wav" />
+    <Content Include="bin\Windows\x86\Debug\Resources\moneysound.wav" />
     <Content Include="bin\Windows\x86\Debug\Resources\mouseClick.wav" />
     <Content Include="bin\Windows\x86\Debug\Resources\newfont.xml" />
     <Content Include="bin\Windows\x86\Debug\Resources\newicon.ico" />

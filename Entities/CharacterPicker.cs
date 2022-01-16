@@ -13,6 +13,7 @@ namespace Tartarus
     {
         private List<HeroNew> presets;
         private SoundEffect movingSFX;
+        private SoundEffect swapSFX;
         private TimingDiagram bookmarkTimer;
 
         private int Count => presets.Count;
@@ -42,18 +43,19 @@ namespace Tartarus
 
         public HeroNew CurrentHero => presets[CurrentIndex];
 
-        public CharacterPicker(Scene scene, SoundEffect movingSFX) 
+        public CharacterPicker(Scene scene, SoundEffect movingSFX, SoundEffect swapSFX) 
             : base(scene)
         {
             presets = new List<HeroNew>();
             this.movingSFX = movingSFX;
-            bookmarkTimer = new TimingDiagram(this);
+            this.swapSFX = swapSFX;
+            bookmarkTimer = new TimingDiagram(this, Scene.Camera.Width + 5);
             bookmarkTimer.Add(Scene.Camera.Width + 5, Scene.Camera.Width - 71, 0.6f, Ease.SineOut);
             bookmarkTimer.Start();
         }
 
         public CharacterPicker(Scene scene)
-            : this(scene, null) { }
+            : this(scene, null, null) { }
         
 
         public void Swap(int index1, int index2)
@@ -66,6 +68,7 @@ namespace Tartarus
             HeroNew temp = presets[index1];
             presets[index1] = presets[index2];
             presets[index2] = temp;
+            swapSFX.Play();
         }
 
         public void Add(HeroNew preset)

@@ -16,7 +16,8 @@ namespace Tartarus
         private Text pressStart;
         private SineWaver waver;
         private SoundEffect abc;
-
+        private SoundEffect jingle;
+        private GSong triumphant;
 
         public CharacterSelectScene() : base()
         {
@@ -32,8 +33,10 @@ namespace Tartarus
             ActorPresets.Begin();
             RunData.Reset();
             abc = Calc.SFXFromFile("mouseClick.wav");
+            triumphant = new GSong("triumphant", "Triumphant.wav", 0.5f);
+            jingle = Calc.SFXFromFile("jingle.wav");
 
-            picker = new CharacterPicker(this, abc);
+            picker = new CharacterPicker(this, abc, jingle);
             picker.Position = new Vector2(20, 100);
             picker.Add(ActorPresets.Anna);
             picker.Add(ActorPresets.Sophie);
@@ -42,7 +45,6 @@ namespace Tartarus
 
             helper = new Entity(this);
             background = new Background(helper, new GTexture("viennabg2.png"));
-            helper.Add(background);
             pressStart = new Text("PRESS START TO BEGIN",
                 new Vector2(Camera.Width / 2, Camera.Height - 20),
                 Color.White, true, PixelFont.Alignment.Center);
@@ -52,12 +54,16 @@ namespace Tartarus
             waver.angFrequency = 2.5f;
             waver.displacement = pressStart.DrawingPosition.Y;
             helper.Layer = -2;
+            triumphant.Play();
+            
         }
 
         public override void End()
         {
             base.End();
 
+
+            triumphant.Stop();
 
         }
 

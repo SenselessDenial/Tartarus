@@ -12,6 +12,8 @@ namespace Tartarus
         public float Value { get; private set; }
         private float time;
 
+        private float StartValue;
+
         private readonly List<TimingRequest> requests;
         private readonly List<ActionRequest> actions;
         private readonly List<ActionRequest> completedActions;
@@ -24,15 +26,19 @@ namespace Tartarus
 
         private TimingRequest LastRequest => requests.Count > 0 ? requests[requests.Count - 1] : new TimingRequest(0, 0, 0, Maintain);
 
-        public TimingDiagram(Entity entity) : base(entity, true, false)
+        public TimingDiagram(Entity entity, float startValue) : base(entity, true, false)
         {
             requests = new List<TimingRequest>();
             actions = new List<ActionRequest>();
             completedActions = new List<ActionRequest>();
-            Value = 0f;
+            StartValue = startValue;
+            Value = startValue;
             time = 0f;
             backdrop = 0f;
         }
+
+        public TimingDiagram(Entity entity)
+            : this(entity, 0f) { }
 
         public void Start()
         {

@@ -19,7 +19,6 @@ namespace Tartarus
         public static float DeltaTime { get; private set; }
         public static string AssemblyLocationPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         public static string ResourceFolderPath = Path.Combine(AssemblyLocationPath, "Resources");
-        
         public int ScreenWidth
         {
             get => graphics.PreferredBackBufferWidth;
@@ -71,7 +70,6 @@ namespace Tartarus
             base.Initialize();
             Input.Initialize();
             Drawing.Initialize();
-
             SceneManager.Initialize();
 
             Scene = SceneManager.Default;

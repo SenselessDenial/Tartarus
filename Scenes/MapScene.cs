@@ -4,17 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Tartarus
 {
     public class MapScene : Scene
     {
+        BasicEffect ef = new BasicEffect(TartarusGame.Instance.GraphicsDevice);
+
+        Entity helper;
+        NumberDisplayer money;
+
+
         private MapReader reader;
 
 
         public MapScene() : base()
         {
             // DO NOT INITALIZE OBJECTS HERE!
+
         }
 
         public override void Begin()
@@ -26,9 +34,9 @@ namespace Tartarus
             if (RunData.Map.IsDone)
                 SetNextScene(SceneManager.WinScene);
 
-            Logger.Log(RunData.Map.FloorNum);
-            Logger.Log(RunData.Map.NumOfFloors);
-
+            helper = new Entity(this);
+            money = new NumberDisplayer(helper, 0, 0.008f);
+            money.Offset = new Vector2(this.Camera.Width - 50, 0f);
 
             reader = new MapReader(this);
         }
@@ -43,8 +51,7 @@ namespace Tartarus
         public override void Update()
         {
             base.Update();
-
-
+            money.TargetNum = RunData.Money;
         }
 
         public override void Render()
